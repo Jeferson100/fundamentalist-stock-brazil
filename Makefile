@@ -4,7 +4,7 @@ install:
 	pip install --upgrade pip && \
 	pip install -r requirements.txt
 format:
-	black *.ipynb
+	black StockBrazil/*.py
 
 lint:
-	pylint --disable=R,C *.ipynb
+	pylint --disable=R,C StockBrazil/*.py
