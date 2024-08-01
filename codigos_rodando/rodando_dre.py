@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.BalanceSheet import TabelaResumoDataScraper
+from FundamentsStockBrazil.IncomeStatement import DREDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -22,9 +22,8 @@ options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
 options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
-scraper = TabelaResumoDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/resumo_balanco.csv')
+scraper = DREDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
 
 dados = scraper.rodar_acoes()
 
-dados.to_csv('../dados/resumo_balanco.csv')
-
+dados.to_csv('../dados/dre.csv')
