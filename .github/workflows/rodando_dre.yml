@@ -1,0 +1,43 @@
+name: Scraping DRE
+on:
+  push:  
+  schedule:
+    - cron: "0 7 2 * *"
+  workflow_dispatch:
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Copia os arquivos do repo
+          uses: actions/checkout@v4
+        - name: Instalar o Python
+          uses: actions/setup-python@v3
+          with:
+            python-version: "3.12"
+        - name: Cache Python dependencies
+          uses: actions/cache@v3
+          with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+        - name: Install dependencies
+          run: |
+            make install
+        - name: Rodando coleta
+          run: |
+            cd ./codigos_rodando
+            pwd
+            python rodando_dre.py
+
+        - name: Configure Git
+          run: |
+            git config --global user.email "sehnemjeferson@gmail.com"
+            git config --global user.name "Jeferson Sehnem"
+        - name: Commit and push changes
+          run: |
+            git add .
+            git commit -m "Coletando dre em: $(date +'%Y-%m-%d')"
+            git push
+          env:
+            GITHUB_TOKEN: ${{ secrets.ACTIONS_FUNDAMENTS }}
