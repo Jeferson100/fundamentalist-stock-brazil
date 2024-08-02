@@ -39,6 +39,10 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.ACTIONS_FUNDAMENTS }}
           run: |
             git add .
+             if git diff-index --quiet HEAD; then
+                echo "No changes to commit"
+                exit 0
+            fi
             git commit -m "Coletando dre em: $(date +'%Y-%m-%d')"
             git push https://Jeferson100:${{ secrets.ACTIONS_FUNDAMENTS }}@github.com/Jeferson100/fundamentalist-stock-brazil.git HEAD:main
             
