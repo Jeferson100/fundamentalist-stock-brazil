@@ -33,10 +33,12 @@ jobs:
           run: |
             git config --global user.email "sehnemjeferson@gmail.com"
             git config --global user.name "Jeferson Sehnem"
+
         - name: Commit and push changes
+          env:
+              GITHUB_TOKEN: ${{ secrets.ACTIONS_FUNDAMENTS }}
           run: |
             git add .
             git commit -m "Coletando dre em: $(date +'%Y-%m-%d')"
-            git push
-          env:
-            GITHUB_TOKEN: ${{ secrets.ACTIONS_FUNDAMENTS }}
+            git push https://Jeferson100:${{ secrets.ACTIONS_FUNDAMENTS }}@github.com/Jeferson100/fundamentalist-stock-brazil.git HEAD:main
+            
