@@ -5,7 +5,7 @@ from FundamentsStockBrazil.IncomeStatement import DreDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-with open('codigos_teste.txt', 'r') as f:
+with open('codigos_ibovespa.txt', 'r') as f:
     codigos_ibovespa = f.read().splitlines()
 
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11', 'IRBR3'}
