@@ -1,8 +1,7 @@
 name: Scraping balanco patrimonial
-on:
-  push:  
+on: 
   schedule:
-    - cron: "0 7 2 * *"
+    - cron: "0 7 15 1,4,7,9 *"
   workflow_dispatch:
 jobs:
     build:

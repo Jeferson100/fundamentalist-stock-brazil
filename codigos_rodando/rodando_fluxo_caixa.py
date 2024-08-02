@@ -1,11 +1,10 @@
-#!/usr/bin/env python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.IncomeStatement import DreDataScraper
+from FundamentsStockBrazil.CashFlow import FluxoCaixaDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-with open('codigos_teste.txt', 'r') as f:
+with open('codigos_ibovespa.txt', 'r') as f:
     codigos_ibovespa = f.read().splitlines()
 
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11', 'IRBR3'}
@@ -22,8 +21,8 @@ options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
 options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
-scraper = DreDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
+scraper = FluxoCaixaDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/fluxo_caixa.csv')
 
 dados = scraper.rodar_acoes()
 
-dados.to_csv('../dados/dre.csv')
+dados.to_csv('../dados/fluxo_caixa.csv')

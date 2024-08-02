@@ -68,7 +68,7 @@ class FluxoCaixaDataScraper:
                     break
             dados['fluxo_caixa_operacional'].append(lista_resumo_balanco[1].replace('R$','').replace(',','.').strip())
             dados['fluxo_caixa_investimentos'].append(lista_resumo_balanco[3].replace('R$','').replace(',','.').strip())
-            dados['fluxo_caixa_financiamento'].append(lista_resumo_balanco[7].replace('R$','').replace(',','.').strip())
+            dados['fluxo_caixa_financiamento'].append(lista_resumo_balanco[5].replace('R$','').replace(',','.').strip())
             dados['aumento_reducao_caixa_equivalentes'].append(lista_resumo_balanco[7].replace('R$','').replace(',','.').strip())
             
         df_resumo_balanco = pd.DataFrame(dados)
@@ -91,7 +91,7 @@ class FluxoCaixaDataScraper:
                     break
             dados['fluxo_caixa_operacional'].append(lista_resumo_balanco[1].replace('R$','').replace(',','.').strip())
             dados['fluxo_caixa_investimentos'].append(lista_resumo_balanco[3].replace('R$','').replace(',','.').strip())
-            dados['fluxo_caixa_financiamento'].append(lista_resumo_balanco[7].replace('R$','').replace(',','.').strip())
+            dados['fluxo_caixa_financiamento'].append(lista_resumo_balanco[5].replace('R$','').replace(',','.').strip())
             dados['aumento_reducao_caixa_equivalentes'].append(lista_resumo_balanco[7].replace('R$','').replace(',','.').strip())
             
         df_resumo_balanco = pd.DataFrame(dados)
