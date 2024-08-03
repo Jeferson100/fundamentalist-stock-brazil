@@ -1,7 +1,7 @@
-name: Scraping balanco patrimonial
+name: Scraping Precos Relativos
 on: 
   schedule:
-    - cron: "0 6 15 1,4,7,9 *"
+    - cron: "0 6 1 * *"
   workflow_dispatch:
 jobs:
     build:
@@ -27,7 +27,7 @@ jobs:
           run: |
             cd ./codigos_rodando
             pwd
-            python rodando_balanco_patrimonial.py
+            python rodando_precos_relativos.py
 
         - name: Configure Git
           run: |
