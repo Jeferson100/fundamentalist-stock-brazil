@@ -1460,6 +1460,7 @@ Tempo de execução da ação ABEV3: 0.54 minutos
 Tempo de execução da ação AZUL4: 0.36 minutos
 Tempo de execução da ação B3SA3: 0.60 minutos
 ```
+**Arquivo de saida:**
 
 <div>
 <table border="1" class="dataframe">
@@ -1628,6 +1629,8 @@ Tempo de execução da ação ABEV3: 0.02 minutos
 Tempo de execução da ação AZUL4: 0.02 minutos
 Tempo de execução da ação B3SA3: 0.02 minutos
 ```
+
+**Arquivo de saida:**
 
 <div>
 <table border="1" class="dataframe">
