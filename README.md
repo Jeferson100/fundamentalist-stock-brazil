@@ -125,18 +125,6 @@ Tempo de execução da ação B3SA3: 1.53 minutos
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -341,7 +329,7 @@ Tempo de execução da ação B3SA3: 1.53 minutos
 
 
 
-## Classe DREDataScraper
+## Classe DreDataScraper
 
 A classe `DreDataScraper` é responsável por coletar os dados da tabela de DRE. Para ver um exemplo de como usar a classe, verifique o arquivo [rodando_dre.py](codigos_rodando/rodando_dre.py).
 
@@ -395,18 +383,6 @@ Tempo de execução da ação B3SA3: 1.16 minutos
 **Arquivo de saida:**
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -565,6 +541,8 @@ Tempo de execução da ação B3SA3: 1.16 minutos
 
 A classe `CapexDataScraper` é responsável por fazer o web scraping dos dados do Capex. Para ver um exemplo de como usar a classe, verifique o arquivo [rodando_capex.py](codigos_rodando/rodando_capex.py).
 
+### Exemplo de Uso
+
 ```python
 import sys
 sys.path.append('..')
@@ -604,4 +582,471 @@ dados.to_csv('../dados/capex.csv')
 ```
 
 **Saida da execução**
+
+```
+Tempo de execução da ação ABEV3: 0.72 minutos
+Tempo de execução da ação AZUL4: 0.45 minutos
+Tempo de execução da ação B3SA3: 0.76 minutos
+
+```
+**Arquivo de saida:**
+<div>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datas</th>
+      <th>capex_tres_meses</th>
+      <th>fluxo_caixa_livre_tres_meses</th>
+      <th>capex_doze_meses</th>
+      <th>fluxo_caixa_livre_doze_meses</th>
+      <th>tic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30/06/2024</td>
+      <td>-973.35</td>
+      <td>2380.00</td>
+      <td>-5410.00</td>
+      <td>20540.0</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>31/03/2024</td>
+      <td>-979.68</td>
+      <td>-261.48</td>
+      <td>-5700.00</td>
+      <td>20310.0</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>31/12/2023</td>
+      <td>-2200.00</td>
+      <td>11750.00</td>
+      <td>-5850.00</td>
+      <td>18860.0</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30/09/2023</td>
+      <td>-1260.00</td>
+      <td>6670.00</td>
+      <td>-5650.00</td>
+      <td>16930.0</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30/06/2023</td>
+      <td>-1260.00</td>
+      <td>2150.00</td>
+      <td>-6210.00</td>
+      <td>14550.0</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>31/03/2012</td>
+      <td>-2.57</td>
+      <td>218.06</td>
+      <td>-37.57</td>
+      <td>1570.0</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>31/12/2011</td>
+      <td>-11.40</td>
+      <td>252.89</td>
+      <td>-41.04</td>
+      <td>1640.0</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>30/09/2011</td>
+      <td>-10.90</td>
+      <td>584.01</td>
+      <td>-119.12</td>
+      <td>1970.0</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>30/06/2011</td>
+      <td>-12.70</td>
+      <td>519.22</td>
+      <td>-121.18</td>
+      <td>1800.0</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>31/03/2011</td>
+      <td>-6.04</td>
+      <td>287.16</td>
+      <td>-148.67</td>
+      <td>1790.0</td>
+      <td>B3SA3</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 6 columns</p>
+</div>
+
+## Classe PrecosRelativosDataScraper
+
+A classe `PrecosRelativosDataScraper` tem como objetivo baixar dados de indicadores de precos relativos. Para um exemplo de como usar a classe, veja o arquivo [rodando_precos_relativos.py](codigos_rodando/rodando_precos_relativos.py).
+
+```python
+import sys
+sys.path.append('..')
+from FundamentsStockBrazil.RelativePrices import PrecosRelativosDataScraper
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Lista de códigos das ações do Ibovespa
+codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
+
+# Define o setor financeiro
+setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
+
+# Caminho para o driver do Chrome
+chrome_driver_path = "/usr/bin/chromedriver"
+
+# Configuração do serviço do Chrome
+service = Service(executable_path=chrome_driver_path)
+
+# Configurações do Chrome
+options = Options()
+options.add_argument("--headless")  # Executar em modo headless
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
+options.add_argument("--disable-gpu")  # Desativar o uso de GPU
+options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
+
+# Inicializa o scraper
+scraper = PrecosRelativosDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/precos_relativos.csv')
+
+# Executa a coleta de dados
+dados = scraper.rodar_acoes()
+
+# Salva os dados em um arquivo CSV
+dados.to_csv('../dados/precos_relativos.csv')
+```
+
+**Saida da execução**
+
+```
+Tempo de execução da ação ABEV3: 1.14 minutos
+Tempo de execução da ação AZUL4: 0.74 minutos
+Tempo de execução da ação B3SA3: 1.52 minutos
+```
+
+<div>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datas</th>
+      <th>preco_lucro</th>
+      <th>preco_vpa</th>
+      <th>preco_receita_liquida</th>
+      <th>preco_fco</th>
+      <th>preco_fcf</th>
+      <th>preco_ativo_total</th>
+      <th>preco_ebit</th>
+      <th>preco_capital_giro</th>
+      <th>preco_ncav</th>
+      <th>ev_ebit</th>
+      <th>ev_ebitda</th>
+      <th>ev_receita_liquida</th>
+      <th>ev_fco</th>
+      <th>ev_fcf</th>
+      <th>ev_atito_total</th>
+      <th>market_cap_empresa</th>
+      <th>enterprise_value</th>
+      <th>dividend_yield</th>
+      <th>tic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>02/08/2024</td>
+      <td>12.99</td>
+      <td>1.96</td>
+      <td>2.32</td>
+      <td>7.21</td>
+      <td>9.11</td>
+      <td>1.30</td>
+      <td>9.71</td>
+      <td>50.58</td>
+      <td>-4.21</td>
+      <td>9.16</td>
+      <td>6.94</td>
+      <td>2.19</td>
+      <td>6.80</td>
+      <td>8.59</td>
+      <td>1.23</td>
+      <td>187040.0</td>
+      <td>176350.0</td>
+      <td>0.0615</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30/06/2024</td>
+      <td>12.85</td>
+      <td>1.94</td>
+      <td>2.29</td>
+      <td>7.13</td>
+      <td>9.01</td>
+      <td>1.29</td>
+      <td>9.61</td>
+      <td>50.02</td>
+      <td>-4.16</td>
+      <td>9.05</td>
+      <td>6.86</td>
+      <td>2.16</td>
+      <td>6.72</td>
+      <td>8.49</td>
+      <td>1.22</td>
+      <td>184990.0</td>
+      <td>174300.0</td>
+      <td>0.0622</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>31/03/2024</td>
+      <td>13.22</td>
+      <td>2.21</td>
+      <td>2.41</td>
+      <td>7.37</td>
+      <td>9.44</td>
+      <td>1.43</td>
+      <td>10.28</td>
+      <td>-809.80</td>
+      <td>-4.04</td>
+      <td>9.80</td>
+      <td>7.38</td>
+      <td>2.30</td>
+      <td>7.03</td>
+      <td>9.00</td>
+      <td>1.37</td>
+      <td>191770.0</td>
+      <td>182740.0</td>
+      <td>0.0600</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>31/12/2023</td>
+      <td>13.67</td>
+      <td>2.51</td>
+      <td>2.49</td>
+      <td>8.02</td>
+      <td>10.51</td>
+      <td>1.49</td>
+      <td>10.63</td>
+      <td>-44.62</td>
+      <td>-3.41</td>
+      <td>9.96</td>
+      <td>7.53</td>
+      <td>2.33</td>
+      <td>7.51</td>
+      <td>9.84</td>
+      <td>1.40</td>
+      <td>198180.0</td>
+      <td>185630.0</td>
+      <td>0.0580</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30/09/2023</td>
+      <td>13.43</td>
+      <td>2.24</td>
+      <td>2.46</td>
+      <td>8.97</td>
+      <td>11.97</td>
+      <td>1.47</td>
+      <td>10.88</td>
+      <td>54.65</td>
+      <td>-4.61</td>
+      <td>10.14</td>
+      <td>7.64</td>
+      <td>2.29</td>
+      <td>8.37</td>
+      <td>11.16</td>
+      <td>1.37</td>
+      <td>202590.0</td>
+      <td>188900.0</td>
+      <td>0.0593</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>30/06/2009</td>
+      <td>70.40</td>
+      <td>2.68</td>
+      <td>36.01</td>
+      <td>33.08</td>
+      <td>34.12</td>
+      <td>2.51</td>
+      <td>87.62</td>
+      <td>38.74</td>
+      <td>-2.138.78</td>
+      <td>83.74</td>
+      <td>NA</td>
+      <td>34.41</td>
+      <td>31.62</td>
+      <td>32.61</td>
+      <td>2.39</td>
+      <td>52450.0</td>
+      <td>50130.0</td>
+      <td>0.0176</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>31/03/2009</td>
+      <td>60.11</td>
+      <td>2.69</td>
+      <td>27.34</td>
+      <td>25.94</td>
+      <td>26.67</td>
+      <td>2.47</td>
+      <td>72.67</td>
+      <td>46.12</td>
+      <td>-86.97</td>
+      <td>69.09</td>
+      <td>NA</td>
+      <td>25.99</td>
+      <td>24.66</td>
+      <td>25.36</td>
+      <td>2.35</td>
+      <td>52450.0</td>
+      <td>49860.0</td>
+      <td>0.0176</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>31/12/2008</td>
+      <td>81.24</td>
+      <td>2.72</td>
+      <td>32.74</td>
+      <td>26.84</td>
+      <td>27.53</td>
+      <td>2.57</td>
+      <td>94.69</td>
+      <td>58.95</td>
+      <td>-210.94</td>
+      <td>91.47</td>
+      <td>NA</td>
+      <td>31.63</td>
+      <td>25.93</td>
+      <td>26.59</td>
+      <td>2.48</td>
+      <td>52450.0</td>
+      <td>50670.0</td>
+      <td>0.0176</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>30/09/2008</td>
+      <td>NA</td>
+      <td>2.69</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>2.53</td>
+      <td>NA</td>
+      <td>40.42</td>
+      <td>688.87</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>2.44</td>
+      <td>52450.0</td>
+      <td>50540.0</td>
+      <td>0.0176</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>30/06/2008</td>
+      <td>NA</td>
+      <td>2.67</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>2.46</td>
+      <td>NA</td>
+      <td>33.22</td>
+      <td>-770.99</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>2.35</td>
+      <td>52370.0</td>
+      <td>50070.0</td>
+      <td>0.0176</td>
+      <td>B3SA3</td>
+    </tr>
+  </tbody>
+</table>
+<p>144 rows × 20 columns</p>
+</div>
+
+
+
+
+
 
