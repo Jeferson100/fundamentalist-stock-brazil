@@ -127,9 +127,8 @@ Os arquivos contêm dados de 71 ações, que são as seguintes:
 `ABEV3`, `AZUL4`, `B3SA3`, `BBAS3`, `BBDC3`, `BBDC4`, `BBSE3`, `BEEF3`, `BPAC11`, `BRAP4`, `BRFS3`, `BRKM5`, `CCRO3`, `CIEL3`, `CMIG4`, `COGN3`, `CPFE3`, `CRFB3`, `CSAN3`, `CSNA3  `, `CVCB3`, `CYRE3`, `ECOR3`, `EGIE3`, `ELET3`, `ELET6`, `EMBR3`, `ENGI11`, `EQTL3`, `EZTC3 `, `FLRY3`, `GGBR4`, `GOAU4`, `GOLL4`, `HAPV3`, `HYPE3`, `IRBR3`, `ITSA4`, `ITUB4`, `JBSS3`, `KLBN11`, `LREN3`, `MGLU3`, `MRFG3`, `MRVE3`, `MULT3`, `NTCO3`, `PCAR3`, `PETR3`, `PETR4`, `PRIO3`, `QUAL3`, `RADL3`, `RAIL3`, `RENT3`, `SANB11`, `SBSP3`, `SUZB3`, `TAEE11`, `TIMS3`, `TOTS3`, `UGPA3`, `USIM5`, `VALE3`, `VIVT3`, `WEGE3`, `WIZC3`, `YDUQ3`, `SOMA3`, `BPAC11`, `MDIA3`
 
 
-
-
 # Instruções
+
 
 Para usar este projeto, execute os comandos abaixo:
 
@@ -139,7 +138,6 @@ Para usar este projeto, execute os comandos abaixo:
 git clone git@github.com:Jeferson100/fundamentalist-stock-brazil.git
 
 cd fundamentalist-stock-brazil
-
 ```
 2. Instale os pacotes necessários:
 
@@ -150,6 +148,33 @@ pip install -r requirements.txt
 
 Baixe o driver do navegador correspondente ao navegador que você planeja usar  e adicione-o ao seu PATH. No meu caso usei o [Chrome](https://chromedriver.chromium.org/downloads).
 
+## VsCode
+
+A pasta [.devcontainer](.devcontainer) contém o arquivo de [devcontainer.json](.devcontainer/devcontainer.json) com as configurações do vscode. Ela é baseada em uma imagem docker chamado [selenium/standalone-chrome](https://hub.docker.com/r/selenium/standalone-chrome)
+
+Se não tiver o vscode, acesse o [site do vscode](https://code.visualstudio.com/download) e instale-o.
+
+1. Primeiro clone o repositório 
+```bash
+git clone git@github.com:Jeferson100/fundamentalist-stock-brazil.git
+```	
+2. Abra a pasta do repositorio com o VSCode
+
+![imagem](imagens/abrir_pasta_vscode.png)
+
+3. Usar o comando `Rebuild Container` (Reconstruir o Contêiner)
+
+Primeiro certifique-se que a extensão "Dev - Containers" do VSCode está instalada. Você pode encontrá-la nas extensões do vscode.
+
+![imagem](imagens/DEV_container.png)
+
+Com a pasta do repositório aberta no VSCode, digite `F1`, isso abrira o menu de comandos. Em seguida, digite `Rebuild Container` (Reconstruir o Contêiner) e você comecará a construir o contêiner baseado no arquivo `devcontainer.json`. 
+
+4. Instale os pacotes necessários
+
+```bash
+pip install -r requirements.txt
+```
 
 # Usando o Projeto
 
