@@ -9,35 +9,102 @@ Este repositório contém scripts para a coleta de dados fundamentais de ações
 ## Dados coletados
 
 Se voce quiser só coletar os dados para a sua analise, a pasta [dados](dados) contém 6 arquivos .csv. Os arquivos são: 
-- `capex.csv`
 
-Capex contém os seguintes indicadores: `capex_tres_meses`, `fluxo_caixa_livre_tres_meses`, `capex_doze_meses`, `fluxo_caixa_livre_doze_meses`.
+### Indicadores Capex
 
-- `retornos_margens.csv`
+O csv [capex.csv](dados/capex.csv) contém os seguintes indicadores financeiros:
 
-Retornos Margens contém os seguintes indicadores: `retorno_sobre_capital_tangivel_inicial`,`retorno_sobre_capital_investido_inicial`, `retorno_sobre_capital_investido_inicial`, `retorno_sobre_capital_tangivel_inicial_pre_impostos`,`retorno_sobre_capital_investido_inicial_pre_impostos`, `retorno_sobre_patrimonio_liquido_inicial`,`retorno_sobre_ativo_inicial`, `margem_bruta`, `margem_liquida` ,`margem_ebit`,`margem_ebitda`,`giro_do_ativo_inicial`,`alavancagem_financeira`,`passivo_patrimonio_liquido`,`divida_liquida_ebitda`.
+- `capex_tres_meses`: Capital Expenditure (Capex) dos últimos três meses.
+- `fluxo_caixa_livre_tres_meses`: Fluxo de caixa livre dos últimos três meses.
+- `capex_doze_meses`: Capital Expenditure (Capex) dos últimos doze meses.
+- `fluxo_caixa_livre_doze_meses`: Fluxo de caixa livre dos últimos doze meses.
 
-- `dre.csv`
+### Indicadores Retornos e margens
 
-DRE contém os seguintes indicadores: `receita_liquida`, `resultado_bruto`, `ebit`, `depreciacao_amortizacao`, `ebitda`, `lucro_liquido`, `lucro_por_acao`.
+O csv [retornos_margens.csv](dados/retornos_margens.csv) contém os seguintes indicadores financeiros:
 
-- `precos_relativos.csv`
+- `retorno_sobre_capital_tangivel_inicial`: Retorno sobre o capital tangível inicial.
+- `retorno_sobre_capital_investido_inicial`: Retorno sobre o capital investido inicial.
+- `retorno_sobre_capital_tangivel_inicial_pre_impostos`: Retorno sobre o capital tangível inicial, antes dos impostos.
+- `retorno_sobre_capital_investido_inicial_pre_impostos`: Retorno sobre o capital investido inicial, antes dos impostos.
+- `retorno_sobre_patrimonio_liquido_inicial`: Retorno sobre o patrimônio líquido inicial.
+- `retorno_sobre_ativo_inicial`: Retorno sobre o ativo inicial.
+- `margem_bruta`: Margem bruta.
+- `margem_liquida`: Margem líquida.
+- `margem_ebit`: Margem EBIT (Lucro antes de juros e impostos).
+- `margem_ebitda`: Margem EBITDA (Lucro antes de juros, impostos, depreciação e amortização).
+- `giro_do_ativo_inicial`: Giro do ativo inicial.
+- `alavancagem_financeira`: Alavancagem financeira.
+- `passivo_patrimonio_liquido`: Passivo sobre o patrimônio líquido.
+- `divida_liquida_ebitda`: Dívida líquida sobre EBITDA.
 
-Precos Relativos contém os seguintes indicadores:`preco_lucro`, `preco_vpa`,`preco_receita_liquida`, `preco_fco`,`preco_fcf`,`preco_ativo_total`,`preco_ebit`,`preco_capital_giro`,`preco_ncav`,`ev_ebit`,`ev_ebitda`,`ev_receita_liquida´ ,ev_fco`,`ev_fcf`,`ev_atito_total`, `market_cap_empresa`,`enterprise_value (ev)`,`dividend_yield`.
+### Indicadores DRE
 
-- `setor.csv`
+O csv [dre.csv](dados/dre.csv) contém os seguintes indicadores financeiros:
 
-Setor contém os seguintes indicadores: `setor`,`segmento_listagem`,`segmento`.
+- `receita_liquida`: Receita líquida da empresa.
+- `resultado_bruto`: Resultado bruto obtido pela empresa.
+- `ebit`: Lucro antes de juros e impostos (EBIT).
+- `depreciacao_amortizacao`: Valores de depreciação e amortização.
+- `ebitda`: Lucro antes de juros, impostos, depreciação e amortização (EBITDA).
+- `lucro_liquido`: Lucro líquido da empresa.
+- `lucro_por_acao`: Lucro por ação.
 
-- `resumo_balanço.csv` 
+### Indicadores Precos Relativos
 
-Resumo contém os seguintes indicadores: `caixa_equivalentes_caixa`, `ativo_total`, `dividas_curto_prazo`, `divida_longo_prazo`, `divida_bruta`, `divida_liquida`, `patrimonio_liquido`, `valor_patrimonial_acao`, `acoes_ordinarias`, `acoes_preferenciais`, `total`.
+O csv [precos_relativos.csv](dados/precos_relativos.csv) contém os seguintes indicadores financeiros:
 
-- `fluxo_caixa.csv`
+- `preco_lucro`: Preço sobre lucro (P/L).
+- `preco_vpa`: Preço sobre valor patrimonial por ação (P/VPA).
+- `preco_receita_liquida`: Preço sobre receita líquida.
+- `preco_fco`: Preço sobre fluxo de caixa operacional.
+- `preco_fcf`: Preço sobre fluxo de caixa livre.
+- `preco_ativo_total`: Preço sobre ativo total.
+- `preco_ebit`: Preço sobre lucro antes de juros e impostos (EBIT).
+- `preco_capital_giro`: Preço sobre capital de giro.
+- `preco_ncav`: Preço sobre valor patrimonial ajustado (NCAV).
+- `ev_ebit`: Valor da empresa (EV) sobre EBIT.
+- `ev_ebitda`: Valor da empresa (EV) sobre EBITDA.
+- `ev_receita_liquida`: Valor da empresa (EV) sobre receita líquida.
+- `ev_fco`: Valor da empresa (EV) sobre fluxo de caixa operacional.
+- `ev_fcf`: Valor da empresa (EV) sobre fluxo de caixa livre.
+- `ev_ativo_total`: Valor da empresa (EV) sobre ativo total.
+- `market_cap_empresa`: Capitalização de mercado da empresa.
+- `enterprise_value (ev)`: Valor da empresa (EV).
+- `dividend_yield`: Dividend Yield.
 
-Fluxo de caixa contém os seguintes indicadores: `fluxo_caixa_operacional`, `fluxo_caixa_investimentos`, `fluxo_caixa_financiamento`, `aumento_reducao_caixa_equivalentes`
+### Indicadores Setores
 
+O csv [setor.csv](dados/setor.csv) contém os seguintes indicadores financeiros:
 
+- `setor`: O setor econômico ao qual a empresa pertence.
+- `segmento_listagem`: O segmento específico de listagem da empresa no mercado.
+- `segmento`: O segmento de atuação da empresa dentro de seu setor.
+
+### Indicadores Resumo Balanço
+
+O csv [resumo_balanço.csv](dados/resumo_balanço.csv) contém os seguintes indicadores financeiros:
+
+- `caixa_equivalentes_caixa`: Total de caixa e equivalentes de caixa.
+- `ativo_total`: Valor total dos ativos da empresa.
+- `dividas_curto_prazo`: Total de dívidas de curto prazo.
+- `divida_longo_prazo`: Total de dívidas de longo prazo.
+- `divida_bruta`: Total de dívidas brutas.
+- `divida_liquida`: Total de dívidas líquidas.
+- `patrimonio_liquido`: Valor do patrimônio líquido da empresa.
+- `valor_patrimonial_acao`: Valor patrimonial por ação.
+- `acoes_ordinarias`: Quantidade de ações ordinárias emitidas.
+- `acoes_preferenciais`: Quantidade de ações preferenciais emitidas.
+- `total`: Quantidade de ações emitidas.
+
+### Indicadores de Fluxo de Caixa
+
+O csv [fluxo_caixa.csv](dados/fluxo_caixa.csv) contém os seguintes indicadores financeiros:
+
+- `fluxo_caixa_operacional`: Total do fluxo de caixa proveniente das operações da empresa.
+- `fluxo_caixa_investimentos`: Total do fluxo de caixa relacionado aos investimentos realizados pela empresa.
+- `fluxo_caixa_financiamento`: Total do fluxo de caixa proveniente de atividades de financiamento.
+- `aumento_reducao_caixa_equivalentes`: Variação no saldo de caixa e equivalentes de caixa durante o período.
 
 Os arquivos contêm dados de 71 ações, que são as seguintes:
 
@@ -383,7 +450,6 @@ Tempo de execução da ação B3SA3: 1.16 minutos
 **Arquivo de saida:**
 
 <div>
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -591,7 +657,6 @@ Tempo de execução da ação B3SA3: 0.76 minutos
 ```
 **Arquivo de saida:**
 <div>
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -759,7 +824,6 @@ Tempo de execução da ação B3SA3: 1.52 minutos
 ```
 
 <div>
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1044,6 +1108,562 @@ Tempo de execução da ação B3SA3: 1.52 minutos
 </table>
 <p>144 rows × 20 columns</p>
 </div>
+
+## Classe RetornosMargensDataScraper
+
+A classe `RetornosMargensDataScraper` tem como objetivo baixar dados de indicadores de retornos e margens. Para um exemplo de como usar a classe, veja o arquivo [rodando_retornos_margens.py](codigos_rodando/rodando_retornos_margens.py). 
+
+```python
+
+import sys
+sys.path.append('..')
+from FundamentsStockBrazil.RetornosMargens import RetornosMargensDataScraper
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Lista de códigos das ações do Ibovespa
+codigos_ibovespa = ['BBAS3', 'BBDC3', 'BBDC4']
+
+# Define o setor financeiro
+setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
+
+# Caminho para o driver do Chrome
+chrome_driver_path = "/usr/bin/chromedriver"
+
+# Configuração do serviço do Chrome
+service = Service(executable_path=chrome_driver_path)
+
+# Configurações do Chrome
+options = Options()
+options.add_argument("--headless")  # Executar em modo headless
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
+options.add_argument("--disable-gpu")  # Desativar o uso de GPU
+options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
+
+# Inicializa o scraper
+scraper = RetornosMargensDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/retornos_margens.csv')
+
+# Executa a coleta de dados
+dados = scraper.rodar_acoes()
+
+# Salva os dados em um arquivo CSV
+dados.to_csv('../dados/retornos_margens.csv')
+```
+
+**Saida da execução**
+```
+Tempo de execução da ação ABEV3: 0.85 minutos
+Tempo de execução da ação AZUL4: 0.53 minutos
+Tempo de execução da ação B3SA3: 1.21 minutos
+```
+**Arquivo de saida:**
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datas</th>
+      <th>retorno_sobre_capital_tangivel_inicial</th>
+      <th>retorno_sobre_capital_investido_inicial</th>
+      <th>retorno_sobre_capital_tangivel_inicial_pre_impostos</th>
+      <th>retorno_sobre_capital_investido_inicial_pre_impostos</th>
+      <th>retorno_sobre_patrimonio_liquido_inicial</th>
+      <th>retorno_sobre_ativo_inicial</th>
+      <th>margem_bruta</th>
+      <th>margem_liquida</th>
+      <th>margem_ebit</th>
+      <th>margem_ebitda</th>
+      <th>giro_do_ativo_inicial</th>
+      <th>alavancagem_financeira</th>
+      <th>passivo_patrimonio_liquido</th>
+      <th>divida_liquida_ebitda</th>
+      <th>tic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30/06/2024</td>
+      <td>0.3184</td>
+      <td>0.1651</td>
+      <td>0.4824</td>
+      <td>0.2502</td>
+      <td>0.1692</td>
+      <td>0.1080</td>
+      <td>0.5083</td>
+      <td>0.1785</td>
+      <td>0.2388</td>
+      <td>0.3153</td>
+      <td>0.60</td>
+      <td>1.51</td>
+      <td>0.51</td>
+      <td>-0.42</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>31/03/2024</td>
+      <td>0.3130</td>
+      <td>0.1608</td>
+      <td>0.4743</td>
+      <td>0.2436</td>
+      <td>0.1706</td>
+      <td>0.1071</td>
+      <td>0.5066</td>
+      <td>0.1825</td>
+      <td>0.2347</td>
+      <td>0.3117</td>
+      <td>0.59</td>
+      <td>1.55</td>
+      <td>0.55</td>
+      <td>-0.36</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>31/12/2023</td>
+      <td>0.3656</td>
+      <td>0.1738</td>
+      <td>0.5540</td>
+      <td>0.2634</td>
+      <td>0.1769</td>
+      <td>0.1051</td>
+      <td>0.5072</td>
+      <td>0.1819</td>
+      <td>0.2338</td>
+      <td>0.3093</td>
+      <td>0.58</td>
+      <td>1.68</td>
+      <td>0.68</td>
+      <td>-0.51</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30/09/2023</td>
+      <td>0.3126</td>
+      <td>0.1629</td>
+      <td>0.4736</td>
+      <td>0.2469</td>
+      <td>0.1672</td>
+      <td>0.1062</td>
+      <td>0.5030</td>
+      <td>0.1829</td>
+      <td>0.2259</td>
+      <td>0.2999</td>
+      <td>0.58</td>
+      <td>1.53</td>
+      <td>0.53</td>
+      <td>-0.55</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30/06/2023</td>
+      <td>0.2962</td>
+      <td>0.1558</td>
+      <td>0.4489</td>
+      <td>0.2361</td>
+      <td>0.1655</td>
+      <td>0.1045</td>
+      <td>0.4995</td>
+      <td>0.1726</td>
+      <td>0.2150</td>
+      <td>0.2870</td>
+      <td>0.61</td>
+      <td>1.57</td>
+      <td>0.57</td>
+      <td>-0.34</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>30/06/2009</td>
+      <td>0.3432</td>
+      <td>0.0228</td>
+      <td>0.5199</td>
+      <td>0.0345</td>
+      <td>0.0380</td>
+      <td>0.0350</td>
+      <td>1.0000</td>
+      <td>0.5114</td>
+      <td>0.4109</td>
+      <td>NaN</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>0.07</td>
+      <td>NA</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>31/03/2009</td>
+      <td>0.4137</td>
+      <td>0.0275</td>
+      <td>0.6268</td>
+      <td>0.0416</td>
+      <td>0.0445</td>
+      <td>0.0410</td>
+      <td>1.0000</td>
+      <td>0.4548</td>
+      <td>0.3762</td>
+      <td>NaN</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>0.09</td>
+      <td>NA</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>31/12/2008</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0000</td>
+      <td>0.4030</td>
+      <td>0.3458</td>
+      <td>NaN</td>
+      <td>NA</td>
+      <td>1.06</td>
+      <td>0.06</td>
+      <td>NA</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>30/09/2008</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NA</td>
+      <td>1.06</td>
+      <td>0.06</td>
+      <td>NA</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>30/06/2008</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NA</td>
+      <td>1.08</td>
+      <td>0.08</td>
+      <td>NA</td>
+      <td>B3SA3</td>
+    </tr>
+  </tbody>
+</table>
+<p>141 rows × 16 columns</p>
+</div>
+
+## Classe FluxoCaixaDataScraper
+
+A classe `FluxoCaixaDataScraper` tem como objetivo baixar dados de fluxo de caixa. Para um exemplo de como usar a classe, veja o arquivo [rodando_fluxo_caixa.py](codigos_rodando/rodando_fluxo_caixa.py).
+
+```python	
+import sys
+sys.path.append('..')
+from FundamentsStockBrazil.CashFlow import FluxoCaixaDataScraper
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Lista de códigos das ações do Ibovespa
+codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
+
+# Define o setor financeiro
+setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
+
+# Caminho para o driver do Chrome
+chrome_driver_path = "/usr/bin/chromedriver"
+
+# Configuração do serviço do Chrome
+service = Service(executable_path=chrome_driver_path)
+
+# Configurações do Chrome
+options = Options()
+options.add_argument("--headless")  # Executar em modo headless
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
+options.add_argument("--disable-gpu")  # Desativar o uso de GPU
+options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
+
+# Inicializa o scraper
+scraper = FluxoCaixaDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/fluxo_caixa.csv')
+
+# Executa a coleta de dados
+dados = scraper.rodar_acoes()
+
+# Salva os dados em um arquivo CSV
+dados.to_csv('../dados/fluxo_caixa.csv')
+```
+**Saida da execução**
+
+```
+Tempo de execução da ação ABEV3: 0.54 minutos
+Tempo de execução da ação AZUL4: 0.36 minutos
+Tempo de execução da ação B3SA3: 0.60 minutos
+```
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datas</th>
+      <th>fluxo_caixa_operacional</th>
+      <th>fluxo_caixa_investimentos</th>
+      <th>fluxo_caixa_financiamento</th>
+      <th>aumento_reducao_caixa_equivalentes</th>
+      <th>tic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30/06/2024</td>
+      <td>3360.00</td>
+      <td>-1080.00</td>
+      <td>-1700.00</td>
+      <td>1310.00</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>31/03/2024</td>
+      <td>718.20</td>
+      <td>-1780.00</td>
+      <td>-2300.00</td>
+      <td>-3210.00</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>31/12/2023</td>
+      <td>13950.00</td>
+      <td>-2260.00</td>
+      <td>-11990.00</td>
+      <td>-1350.00</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30/09/2023</td>
+      <td>7920.00</td>
+      <td>-1210.00</td>
+      <td>-1400.00</td>
+      <td>5400.00</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30/06/2023</td>
+      <td>3420.00</td>
+      <td>-1220.00</td>
+      <td>-1710.00</td>
+      <td>-43.93</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>31/03/2012</td>
+      <td>220.63</td>
+      <td>6.24</td>
+      <td>-257.18</td>
+      <td>-30.32</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>31/12/2011</td>
+      <td>264.29</td>
+      <td>-85.92</td>
+      <td>-253.19</td>
+      <td>-74.83</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>30/09/2011</td>
+      <td>594.91</td>
+      <td>-33.02</td>
+      <td>-447.52</td>
+      <td>114.38</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>30/06/2011</td>
+      <td>531.92</td>
+      <td>-36.01</td>
+      <td>-506.23</td>
+      <td>-10.32</td>
+      <td>B3SA3</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>31/03/2011</td>
+      <td>293.20</td>
+      <td>-21.57</td>
+      <td>-340.23</td>
+      <td>-68.60</td>
+      <td>B3SA3</td>
+    </tr>
+  </tbody>
+</table>
+<p>130 rows × 6 columns</p>
+</div>
+
+
+## Classe SetorDataScraper
+
+A classe `SetorDataScraper` tem como objetivo baixar dados de setores das ações. Para um exemplo de como usar a classe, veja o arquivo [rodando_setor.py](codigos_rodando/rodando_setor.py).
+
+```python
+
+import sys
+sys.path.append('..')
+from FundamentsStockBrazil.SetorSubsetor import SetorDataScraper
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+# Lista de códigos das ações do Ibovespa
+codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
+
+# Define o setor financeiro
+setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
+
+# Caminho para o driver do Chrome
+chrome_driver_path = "/usr/bin/chromedriver"
+
+# Configuração do serviço do Chrome
+service = Service(executable_path=chrome_driver_path)
+
+# Configurações do Chrome
+options = Options()
+options.add_argument("--headless")  # Executar em modo headless
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
+options.add_argument("--disable-gpu")  # Desativar o uso de GPU
+options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
+
+# Inicializa o scraper
+scraper = SetorDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa)
+
+# Executa a coleta de dados
+dados = scraper.rodar_acoes()
+
+# Salva os dados em um arquivo CSV
+dados.to_csv('../dados/setor.csv')
+```
+
+**Saida da execução**
+```
+Tempo de execução da ação ABEV3: 0.02 minutos
+Tempo de execução da ação AZUL4: 0.02 minutos
+Tempo de execução da ação B3SA3: 0.02 minutos
+```
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>segmento_listagem</th>
+      <th>setor</th>
+      <th>segmento</th>
+      <th>tic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Tradicional - BOVESPA</td>
+      <td>Consumo não Cíclico</td>
+      <td>Cervejas e Refrigerantes</td>
+      <td>ABEV3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Nível 2 de Governança Corporativa</td>
+      <td>Bens Industriais</td>
+      <td>Transporte Aéreo</td>
+      <td>AZUL4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Novo Mercado</td>
+      <td>Financeiro</td>
+      <td>Serviços Financeiros Diversos</td>
+      <td>B3SA3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Contribuição
+Se você encontrar algum problema ou tiver sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+
+
+
+
+
+
 
 
 
