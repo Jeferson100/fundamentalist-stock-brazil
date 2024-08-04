@@ -20,9 +20,6 @@
 [![webdriver-manager](https://img.shields.io/badge/webdriver--manager-4.0.0-blue)](https://pypi.org/project/webdriver-manager/4.0.0/)
 
 
-![Fundamentalist Stock Brazil - InvestSite](imagens/touro_urso_gerado.jpg)
-
-
 Este repositório contém scripts para a coleta de dados fundamentais de ações brasileiras a partir do site [InvestSite](https://www.investsite.com.br/) utilizando a biblioteca Selenium. O objetivo é automatizar a extração de dados financeiros importantes para facilitar a análise e tomada de decisões de investimento.
 
 ## Dados coletados
