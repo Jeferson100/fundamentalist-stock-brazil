@@ -1,7 +1,6 @@
 # Fundamentalist Stock Brazil - InvestSite
 
 [![Scraping Capex](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml)
-
 [![Scraping balanco patrimonial](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_balanco.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_balanco.yml)
 [![Scraping DRE](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml)
 [![Scraping Fluxo de caixa](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_fluxo_caixa.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_fluxo_caixa.yml)
@@ -12,13 +11,13 @@
 
 
 [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://opensource.org/licenses/MIT)
-[![Pandas](https://img.shields.io/badge/pandas-2.2.2-blue)](https://pandas.pydata.org/)
-[![Selenium](https://img.shields.io/badge/selenium-4.22.0-brightgreen)](https://www.selenium.dev/)
-[![Numpy](https://img.shields.io/badge/numpy-1.26.4-blue)](https://numpy.org/)
-[![Pylint](https://img.shields.io/badge/Pylint-2.15.3-blue)](https://pylint.pycqa.org/)
+[![Pandas](https://img.shields.io/badge/pandas-2.2.2-blue)](https://pypi.org/project/pandas/)
+[![Selenium](https://img.shields.io/badge/selenium-4.22.0-brightgreen)](https://pypi.org/project/selenium/4.22.0/)
+[![Numpy](https://img.shields.io/badge/numpy-1.26.4-blue)](https://pypi.org/project/numpy/1.26.4/)
+[![Pylint](https://img.shields.io/badge/Pylint-2.15.3-blue)](https://pypi.org/project/pylint/2.15.3/)
 [![pytest](https://img.shields.io/badge/pytest-7.1.3-brightgreen)](https://docs.pytest.org/)
 [![Black](https://img.shields.io/badge/Black-22.8.0-black)](https://black.readthedocs.io/)
-[![webdriver-manager](https://img.shields.io/badge/webdriver--manager-4.0.0-blue)](https://github.com/SergeyPirogov/webdriver_manager)
+[![webdriver-manager](https://img.shields.io/badge/webdriver--manager-4.0.0-blue)](https://pypi.org/project/webdriver-manager/4.0.0/)
 
 
 ![Fundamentalist Stock Brazil - InvestSite](imagens/touro_urso_gerado.jpg)
