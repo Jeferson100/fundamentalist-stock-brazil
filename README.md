@@ -166,7 +166,7 @@ git clone git@github.com:Jeferson100/fundamentalist-stock-brazil.git
 
 Primeiro certifique-se que a extensão "Dev - Containers" do VSCode está instalada. Você pode encontrá-la nas extensões do vscode.
 
-![imagem](imagens/DEV_container.png)
+![imagem](imagens/dev_container.png)
 
 Com a pasta do repositório aberta no VSCode, digite `F1`, isso abrira o menu de comandos. Em seguida, digite `Rebuild Container` (Reconstruir o Contêiner) e você comecará a construir o contêiner baseado no arquivo `devcontainer.json`. 
 
