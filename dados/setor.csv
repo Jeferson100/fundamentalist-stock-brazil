@@ -12,7 +12,7 @@
 10,Novo Mercado,Consumo não Cíclico,Carnes e Derivados,BRFS3
 11,Nível 1 de Governança Corporativa,Materiais Básicos,Petroquímicos,BRKM5
 12,Novo Mercado,Bens Industriais,Exploração de Rodovias,CCRO3
-13,Novo Mercado,Financeiro,Serviços Financeiros Diversos,CIEL3
+13,Tradicional - BOVESPA,Financeiro,Serviços Financeiros Diversos,CIEL3
 14,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CMIG4
 15,Novo Mercado,Consumo Cíclico,Serviços Educacionais,COGN3
 16,Novo Mercado,Utilidade Pública,Energia Elétrica,CPFE3
@@ -67,5 +67,4 @@
 65,Novo Mercado,Bens Industriais,Motores . Compressores e Outros,WEGE3
 66,Novo Mercado,Financeiro,Corretoras de Seguros e Resseguros,WIZC3
 67,Novo Mercado,Consumo Cíclico,Serviços Educacionais,YDUQ3
-68,Tradicional - BOVESPA,Consumo Cíclico,Tecidos. Vestuário e Calçados,SOMA3
-69,Novo Mercado,Consumo não Cíclico,Alimentos Diversos,MDIA3
+68,Novo Mercado,Consumo não Cíclico,Alimentos Diversos,MDIA3
