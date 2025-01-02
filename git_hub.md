@@ -1,4 +1,4 @@
-# Intalar o git
+# Instalar o git
 
 Para instalar o git, execute o seguinte comando:
 
@@ -19,13 +19,11 @@ git config --global user.name "jeferson100"
 ## Passo 1: Gerar uma chave SSH (se ainda não tiver uma)
 Se você ainda não tiver uma chave SSH configurada, gere uma nova chave SSH:
 
-bash
-Copiar código
 ```bash
 ssh-keygen -t ed25519 -C "seu-email@example.com"
 ```
 
-Siga as instruções na tela e aceite os padrões pressionando Enter. Isso criará uma chave SSH pública e privada em `cat ~/.ssh/id_ed25519` e `cat ~/.ssh/id_ed25519.pub`.
+Siga as instruções na tela e aceite os padrões pressionando Enter. Isso criará uma chave SSH pública e privada em `~/.ssh/id_ed25519` e `~/.ssh/id_ed25519.pub`.
 
 ## Passo 2: Adicionar a chave SSH ao agente SSH
 
