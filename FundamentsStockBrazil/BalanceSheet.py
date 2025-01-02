@@ -5,9 +5,6 @@ from selenium.common.exceptions import (
     StaleElementReferenceException,
     UnexpectedAlertPresentException,
 )
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 import time
 import pandas as pd
 import numpy as np
