@@ -4,29 +4,37 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import (
     StaleElementReferenceException,
     UnexpectedAlertPresentException,
-    WebDriverException
 )
+from typing import List
+import asyncio
 import time
 import pandas as pd
 import numpy as np
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 
-class PrecosRelativosDataScraper:
-    def __init__(self, setor_financeiro, options, service, acoes, diretorio=None):
+class AsyncPrecosRelativosDataScraper:
+    def __init__(self, 
+                 setor_financeiro : List[str], 
+                 options, 
+                 service, 
+                 acoes: List[str], 
+                 diretorio: str = None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
         self.acoes = acoes
         self.diretorio = diretorio
-
-    def navegador_get(self, acao):
+    
+    async def navegador_get(self, acao):
         navegador = webdriver.Chrome(service=self.service, options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
         return navegador
-
-    def obter_datas(self, navegador):
+    
+    async def obter_datas(self, navegador):
         while True:
             try:
                 elementos_data = navegador.find_elements(
@@ -40,8 +48,8 @@ class PrecosRelativosDataScraper:
                 return datas
             except StaleElementReferenceException:
                 continue
-
-    def obter_dados_tabela(self, navegador, data):
+    
+    async def obter_dados_tabela(self, navegador, data):
         while True:
             try:
                 select_element = navegador.find_element(
@@ -62,9 +70,10 @@ class PrecosRelativosDataScraper:
 
                 return lista_resumo_balanco
             except StaleElementReferenceException:
+                await asyncio.sleep(0.1)
                 continue
 
-    def coletar_dados_financeiros(self, navegador, datas):
+    async def coletar_dados_financeiros(self, navegador, datas):
         dados = {
             "datas": datas,
             "Preço/Lucro": [],
@@ -88,7 +97,7 @@ class PrecosRelativosDataScraper:
         }
         for data in datas:
             while True:
-                lista_resumo_balanco = self.obter_dados_tabela(
+                lista_resumo_balanco = await self.obter_dados_tabela(
                     navegador=navegador, data=data
                 )
                 if lista_resumo_balanco:
@@ -116,7 +125,8 @@ class PrecosRelativosDataScraper:
 
         return df_resumo_balanco
 
-    def coletar_dados_nao_financeiros(self, navegador, datas):
+    
+    async def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
             "datas": datas,
             "Preço/Lucro": [],
@@ -141,7 +151,7 @@ class PrecosRelativosDataScraper:
 
         for data in datas:
             while True:
-                lista_resumo_balanco = self.obter_dados_tabela(
+                lista_resumo_balanco = await self.obter_dados_tabela(
                     navegador=navegador, data=data
                 )
                 if lista_resumo_balanco:
@@ -180,14 +190,14 @@ class PrecosRelativosDataScraper:
         )
 
         return df_resumo_balanco
-
-    def rodar_acoes(self):
+    
+    async def rodar_acoes(self):
         iteracao = 0
         lista_dataframes = []
         acoes_processadas = set()
         for acao in self.acoes:
 
-            navegador = self.navegador_get(acao=acao)
+            navegador = await self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
                 By.XPATH, "/html/body/div[1]/div[4]/div[2]"
@@ -206,22 +216,15 @@ class PrecosRelativosDataScraper:
             else:
                 start_time = time.time()
 
-                datas = self.obter_datas(navegador=navegador)
+                datas = await self.obter_datas(navegador=navegador)
 
                 if acao in self.setor_financeiro:
                     try:
-                        df_dados = self.coletar_dados_financeiros(
+                        df_dados = await self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
                         )
                     except UnexpectedAlertPresentException:
-                        print("Erro UnexpectedAlertPresentException")
-                        df_dados = self.coletar_dados_financeiros(
-                            navegador=navegador, datas=datas
-                        )
-
-                    except WebDriverException:
-                        print("Erro WebDriverException")
-                        df_dados = self.coletar_dados_financeiros(
+                        df_dados = await self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
                         )
                     colunas = df_dados.columns[
@@ -235,16 +238,10 @@ class PrecosRelativosDataScraper:
                     df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
                 else:
                     try:
-                        df_dados = self.coletar_dados_nao_financeiros(
+                        df_dados = await self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
                         )
                     except UnexpectedAlertPresentException:
-                        print("Erro UnexpectedAlertPresentException")
-                        df_dados = self.coletar_dados_nao_financeiros(
-                            navegador=navegador, datas=datas
-                        )
-                    except WebDriverException:
-                        print("Erro WebDriverException")
                         df_dados = self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
                         )
@@ -337,3 +334,48 @@ class PrecosRelativosDataScraper:
         if "Atual - " in valor:
             return valor.replace("Atual - ", "")
         return valor
+
+
+async def main():
+    # Configurações do navegador
+
+    with open('codigos_ibovespa.txt', 'r') as f:
+        acoes = f.read().splitlines()
+
+    setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11', 'IRBR3'}
+
+    chrome_driver_path = "/usr/bin/chromedriver"
+
+    service = Service(executable_path=chrome_driver_path)
+
+    options = Options()
+    options.add_argument("--headless")  # Executar em modo headless
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
+    options.add_argument("--disable-gpu")  # Desativar o uso de GPU
+    options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
+    
+    # Dados de exemplo
+
+    diretorio = "dados/precos_relativos.csv"
+
+    # Instanciar o scraper
+    scraper = AsyncPrecosRelativosDataScraper(
+        setor_financeiro=setor_financeiro,
+        options=options,
+        service=service,
+        acoes=acoes,
+        diretorio=diretorio
+    )
+
+    # Rodar a coleta de dados
+    dataframes = await scraper.rodar_acoes()
+
+    # Salvar os resultados
+    print("Dados coletados com sucesso!")
+    print(dataframes)
+
+# Executar o evento assíncrono
+if __name__ == "__main__":
+    asyncio.run(main())

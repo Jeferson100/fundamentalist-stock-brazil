@@ -6,3 +6,5 @@ selenium==4.22.0
 numpy==1.26.4
 webdriver-manager==4.0.0
 undetected-chromedriver==3.5.5
+aiohttp==3.11.11
+beautifulsoup4
