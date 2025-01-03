@@ -45,7 +45,7 @@ class DreDataScraper:
             try:
                 select_element = navegador.find_element(
                     By.XPATH,
-                    "/html/body/div[1]/div[4]/div[2]/div[1]/div[3]/table[2]/thead/tr/th[2]/select",
+                    '//*[@id="tabela_resumo_empresa_dre_3meses"]/thead/tr/th[2]/select',
                 )
                 select = Select(select_element)
                 select.select_by_visible_text(data)
@@ -67,15 +67,15 @@ class DreDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "receita_liquida": [],
-            "resultado_bruto": [],
-            "ebit": [np.nan] * len(datas),
-            "depreciacao_amortizacao": [np.nan] * len(datas),
-            "ebitda": [np.nan] * len(datas),
-            "lucro_liquido": [],
-            "lucro_por_acao": [np.nan] * len(datas),
-        }
+                'datas' : datas,
+                'Receita Líquida' : [],
+                'Resultado Bruto' :[],
+                'EBIT' : [np.nan] * len(datas),
+                'Depreciação e Amortização' : [np.nan] * len(datas),
+                'EBITDA' : [np.nan] * len(datas),
+                'Lucro Líquido' : [],
+                'Lucro/Ação' : [np.nan] * len(datas),}
+        
         for data in datas:
             while True:
                 lista_resumo_balanco = self.obter_dados_tabela(
@@ -83,31 +83,35 @@ class DreDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["receita_liquida"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["resultado_bruto"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["lucro_liquido"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
+            
+            metricas = [
+                'Receita Líquida',
+                'Resultado Bruto',
+                'Lucro Líquido',
+                ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metricas:
+                    valor = lista_resumo_balanco[i + 1].replace('R$','').replace(',','.').strip()
+                    dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco = df_resumo_balanco.rename(
+            columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower())
 
         return df_resumo_balanco
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "receita_liquida": [],
-            "resultado_bruto": [],
-            "ebit": [],
-            "depreciacao_amortizacao": [],
-            "ebitda": [],
-            "lucro_liquido": [],
-            "lucro_por_acao": [],
-        }
+                'datas' : datas,
+                'Receita Líquida' : [],
+                'Resultado Bruto' :[],
+                'EBIT' : [],
+                'Depreciação e Amortização' : [],
+                'EBITDA' : [],
+                'Lucro Líquido' : [],
+                'Lucro/Ação' : [],}
 
         for data in datas:
             while True:
@@ -116,29 +120,27 @@ class DreDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["receita_liquida"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["resultado_bruto"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["ebit"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["depreciacao_amortizacao"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["ebitda"].append(
-                lista_resumo_balanco[9].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["lucro_liquido"].append(
-                lista_resumo_balanco[11].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["lucro_por_acao"].append(
-                lista_resumo_balanco[13].replace("R$", "").replace(",", ".").strip()
-            )
+            metricas = [
+                'Receita Líquida',
+                'Resultado Bruto',
+                'Lucro Líquido',
+                'EBIT',
+                'Depreciação e Amortização',
+                'EBITDA',
+                'Lucro/Ação',
+
+                ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metricas:
+                    valor = lista_resumo_balanco[i + 1].replace('R$','').replace(',','.').strip()
+                    dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco = df_resumo_balanco.rename(
+            columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower()
+        )   
 
         return df_resumo_balanco
 
@@ -150,13 +152,16 @@ class DreDataScraper:
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
-                By.XPATH, "/html/body/div[1]/div[4]/div[2]"
+                By.XPATH, '//*[@id="main-content"]/div[2]/div/p[1]'
             )
-
+        
             if acao in acoes_processadas:
                 print(f"Ação {acao} já processada, pulando.")
 
-            elif "código de negociação não encontrado." in elemento_text[0].text:
+            if (
+                elemento_text
+                and "código de negociação não encontrado." in elemento_text[0].text
+            ):
                 print(f"Código de negociação {acao} não encontrado.")
 
             else:
@@ -176,15 +181,8 @@ class DreDataScraper:
                         df_dre = self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
                         )
-                    colunas_selecionadas = df_dre.columns[
-                        (df_dre.columns != "datas")
-                        & (df_dre.columns != "lucro_por_acao")
-                        & (df_dre.columns != "ebit")
-                        & (df_dre.columns != "depreciacao_amortizacao")
-                        & (df_dre.columns != "lucro_por_acao")
-                        & (df_dre.columns != "ebitida")
-                        & (df_dre.columns != "lucro_por_acao")
-                    ]
+                    colunas_selecionadas = df_dre.columns[(df_dre.columns != 'datas') & 
+                                    (df_dre.columns != 'lucro_ação')]
                     for col in colunas_selecionadas:
                         df_dre[col] = df_dre[col].apply(self.converter_valor)
                 else:
@@ -201,8 +199,8 @@ class DreDataScraper:
                         )
                     for col in df_dre.columns[
                         (df_dre.columns != "datas")
-                        & (df_dre.columns != "lucro_por_acao")
-                        & (df_dre.columns != "tic")
+                        & (df_dre.columns != "lucro_ação")
+                        
                     ]:
                         df_dre[col] = df_dre[col].apply(self.converter_valor)
 

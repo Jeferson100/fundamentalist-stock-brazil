@@ -9,6 +9,7 @@ from selenium.common.exceptions import (
 import time
 import pandas as pd
 import numpy as np
+import time
 
 
 class PrecosRelativosDataScraper:
@@ -20,11 +21,20 @@ class PrecosRelativosDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
-        navegador.get(
-            f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
-        )
-        return navegador
+        try:
+            navegador = webdriver.Chrome(service=self.service, options=self.options)
+            navegador.get(
+                f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
+            )
+            return navegador
+        except WebDriverException:
+            print("Erro WebDriverException")
+            time.sleep(5)
+            navegador = webdriver.Chrome(service=self.service, options=self.options)
+            navegador.get(
+                f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
+            )
+            return navegador
 
     def obter_datas(self, navegador):
         while True:
@@ -214,12 +224,14 @@ class PrecosRelativosDataScraper:
                             navegador=navegador, datas=datas
                         )
                     except UnexpectedAlertPresentException:
+                        time.sleep(5)
                         print("Erro UnexpectedAlertPresentException")
                         df_dados = self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
                         )
 
                     except WebDriverException:
+                        time.sleep(5)
                         print("Erro WebDriverException")
                         df_dados = self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
@@ -239,11 +251,13 @@ class PrecosRelativosDataScraper:
                             navegador=navegador, datas=datas
                         )
                     except UnexpectedAlertPresentException:
+                        time.sleep(5)
                         print("Erro UnexpectedAlertPresentException")
                         df_dados = self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
                         )
                     except WebDriverException:
+                        time.sleep(5)
                         print("Erro WebDriverException")
                         df_dados = self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
