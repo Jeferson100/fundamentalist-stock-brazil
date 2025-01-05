@@ -17,7 +17,9 @@
                 "ms-toolsai.vscode-jupyter-cell-tags",
                 "ms-toolsai.jupyter-keymap",
                 "github.vscode-github-actions",
-                "aaravb.chrome-extension-developer-tools"
+                "aaravb.chrome-extension-developer-tools",
+                "GitHub.copilot-chat",
+                "GitHub.copilot"
             ]
         }
     }

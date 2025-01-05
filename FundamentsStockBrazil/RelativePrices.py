@@ -59,6 +59,7 @@ class PrecosRelativosDataScraper:
                     "/html/body/div[3]/div/div[2]/div/div[2]/main/div[2]/div[1]/section[2]/div/table/thead/tr/th[2]/select",
                 )
                 select = Select(select_element)
+
                 select.select_by_visible_text(data)
 
                 tabela = navegador.find_element(By.ID, "precos_relativos")
@@ -76,7 +77,6 @@ class PrecosRelativosDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
             "Preço/Lucro": [],
             "Preço/VPA": [],
             "Preço/Receita Líquida": [],
@@ -120,6 +120,8 @@ class PrecosRelativosDataScraper:
 
         df_resumo_balanco = pd.DataFrame(dados)
 
+        df_resumo_balanco['datas'] = datas
+
         df_resumo_balanco = df_resumo_balanco.rename(
             columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower()
         )
@@ -128,7 +130,6 @@ class PrecosRelativosDataScraper:
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
             "Preço/Lucro": [],
             "Preço/VPA": [],
             "Preço/Receita Líquida": [],
@@ -184,6 +185,8 @@ class PrecosRelativosDataScraper:
                     dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco['datas'] = datas
 
         df_resumo_balanco = df_resumo_balanco.rename(
             columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower()
@@ -257,7 +260,7 @@ class PrecosRelativosDataScraper:
                             navegador=navegador, datas=datas
                         )
                     except WebDriverException:
-                        time.sleep(5)
+                        time.sleep(10)
                         print("Erro WebDriverException")
                         df_dados = self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
