@@ -14,11 +14,11 @@ class SetorDataScraper:
         self.options = options
         self.service = service
         self.acoes = acoes
-        self.diretorio = None
         self.dados = None
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
+        #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -27,7 +27,7 @@ class SetorDataScraper:
     def obter_dados_tabela(self, navegador):
         while True:
             try:
-                tabela = navegador.find_element(By.ID, "pagina_empresa_dados_basicos")
+                tabela = navegador.find_element(By.ID, "dados_basicos")
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
                 lista_dados_basicos = []
                 for linha in linhas:
@@ -41,7 +41,10 @@ class SetorDataScraper:
 
     def rodar_acoes(self):
         acoes_processadas = set()
-        dados = {"segmento_listagem": [], "setor": [], "segmento": [], "tic": []}
+        dados = {"Segmento de Listagem": [], 
+                 "Setor": [], 
+                 "Segmento": [], 
+                 "tic": []}
 
         for acao in self.acoes:
 
@@ -54,7 +57,10 @@ class SetorDataScraper:
             if acao in acoes_processadas:
                 print(f"Ação {acao} já processada, pulando.")
 
-            elif "código de negociação não encontrado." in elemento_text[0].text:
+            elif (
+                elemento_text
+                and "código de negociação não encontrado." in elemento_text[0].text
+            ):
                 print(f"Código de negociação {acao} não encontrado.")
 
             else:
@@ -63,10 +69,21 @@ class SetorDataScraper:
                     df_dic = self.obter_dados_tabela(navegador=navegador)
                 except UnexpectedAlertPresentException:
                     df_dic = self.obter_dados_tabela(navegador=navegador)
+                
+                metrics = [
+                    "Segmento de Listagem",
+                    "Setor",
+                    "Segmento",
+                ]
 
-                dados["segmento_listagem"].append(df_dic[9])
-                dados["setor"].append(df_dic[-7])
-                dados["segmento"].append(df_dic[-3])
+                for i in range(0, len(df_dic)):
+                    chave = df_dic[i]
+                    if chave in metrics:
+                        valor = df_dic[i + 1]
+                        dados[chave].append(valor)
+                    else:
+                        continue
+
                 dados["tic"].append(acao)
                 end_time = time.time()
 
