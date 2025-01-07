@@ -15,25 +15,27 @@ from selenium.webdriver.chrome.options import Options
 
 
 class AsyncPrecosRelativosDataScraper:
-    def __init__(self, 
-                 setor_financeiro : List[str], 
-                 options, 
-                 service, 
-                 acoes: List[str], 
-                 diretorio: str = None):
+    def __init__(
+        self,
+        setor_financeiro: List[str],
+        options,
+        service,
+        acoes: List[str],
+        diretorio: str = None,
+    ):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
         self.acoes = acoes
         self.diretorio = diretorio
-    
+
     async def navegador_get(self, acao):
         navegador = webdriver.Chrome(service=self.service, options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
         return navegador
-    
+
     async def obter_datas(self, navegador):
         while True:
             try:
@@ -48,7 +50,7 @@ class AsyncPrecosRelativosDataScraper:
                 return datas
             except StaleElementReferenceException:
                 continue
-    
+
     async def obter_dados_tabela(self, navegador, data):
         while True:
             try:
@@ -114,7 +116,7 @@ class AsyncPrecosRelativosDataScraper:
             for i in range(0, len(lista_resumo_balanco)):
                 chave = lista_resumo_balanco[i]
                 if chave in metricas:
-                    valor = lista_resumo_balanco[i + 1].replace(',', '.')
+                    valor = lista_resumo_balanco[i + 1].replace(",", ".")
                     dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
@@ -125,7 +127,6 @@ class AsyncPrecosRelativosDataScraper:
 
         return df_resumo_balanco
 
-    
     async def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
             "datas": datas,
@@ -180,7 +181,7 @@ class AsyncPrecosRelativosDataScraper:
             for i in range(0, len(lista_resumo_balanco)):
                 chave = lista_resumo_balanco[i]
                 if chave in metricas:
-                    valor = lista_resumo_balanco[i + 1].replace(',', '.')
+                    valor = lista_resumo_balanco[i + 1].replace(",", ".")
                     dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
@@ -190,7 +191,7 @@ class AsyncPrecosRelativosDataScraper:
         )
 
         return df_resumo_balanco
-    
+
     async def rodar_acoes(self):
         iteracao = 0
         lista_dataframes = []
@@ -233,7 +234,13 @@ class AsyncPrecosRelativosDataScraper:
                     for col in colunas:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
                     df_dados["dividend_yield"] = (
-                        pd.to_numeric(df_dados["dividend_yield"].str.replace('%', '').str.replace(',', '.'),errors='coerce') / 100
+                        pd.to_numeric(
+                            df_dados["dividend_yield"]
+                            .str.replace("%", "")
+                            .str.replace(",", "."),
+                            errors="coerce",
+                        )
+                        / 100
                     )
                     df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
                 else:
@@ -249,7 +256,15 @@ class AsyncPrecosRelativosDataScraper:
                     for col in colunas:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
 
-                    df_dados['dividend_yield'] = pd.to_numeric(df_dados["dividend_yield"].str.replace('%', '').str.replace(',', '.'),errors='coerce') / 100
+                    df_dados["dividend_yield"] = (
+                        pd.to_numeric(
+                            df_dados["dividend_yield"]
+                            .str.replace("%", "")
+                            .str.replace(",", "."),
+                            errors="coerce",
+                        )
+                        / 100
+                    )
 
                     df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
 
@@ -339,10 +354,20 @@ class AsyncPrecosRelativosDataScraper:
 async def main():
     # Configurações do navegador
 
-    with open('codigos_ibovespa.txt', 'r') as f:
+    with open("codigos_ibovespa.txt", "r") as f:
         acoes = f.read().splitlines()
 
-    setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11', 'IRBR3'}
+    setor_financeiro = {
+        "BBAS3",
+        "BBDC3",
+        "BBDC4",
+        "BBSE3",
+        "ITUB4",
+        "BPAC11",
+        "ITUB4",
+        "SANB11",
+        "IRBR3",
+    }
 
     chrome_driver_path = "/usr/bin/chromedriver"
 
@@ -355,7 +380,7 @@ async def main():
     options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
     options.add_argument("--disable-gpu")  # Desativar o uso de GPU
     options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
-    
+
     # Dados de exemplo
 
     diretorio = "dados/precos_relativos.csv"
@@ -366,7 +391,7 @@ async def main():
         options=options,
         service=service,
         acoes=acoes,
-        diretorio=diretorio
+        diretorio=diretorio,
     )
 
     # Rodar a coleta de dados
@@ -375,6 +400,7 @@ async def main():
     # Salvar os resultados
     print("Dados coletados com sucesso!")
     print(dataframes)
+
 
 # Executar o evento assíncrono
 if __name__ == "__main__":

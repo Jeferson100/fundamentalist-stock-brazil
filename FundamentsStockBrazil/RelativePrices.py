@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import (
     StaleElementReferenceException,
     UnexpectedAlertPresentException,
-    WebDriverException
+    WebDriverException,
 )
 import time
 import pandas as pd
@@ -22,7 +22,8 @@ class PrecosRelativosDataScraper:
 
     def navegador_get(self, acao):
         try:
-            navegador = webdriver.Chrome(service=self.service, options=self.options)
+            #navegador = webdriver.Chrome(service=self.service, options=self.options)
+            navegador = webdriver.Chrome(options=self.options)
             navegador.get(
                 f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
             )
@@ -30,7 +31,8 @@ class PrecosRelativosDataScraper:
         except WebDriverException:
             print("Erro WebDriverException")
             time.sleep(5)
-            navegador = webdriver.Chrome(service=self.service, options=self.options)
+            #navegador = webdriver.Chrome(service=self.service, options=self.options)
+            navegador = webdriver.Chrome(options=self.options)
             navegador.get(
                 f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
             )
@@ -115,12 +117,12 @@ class PrecosRelativosDataScraper:
             for i in range(0, len(lista_resumo_balanco)):
                 chave = lista_resumo_balanco[i]
                 if chave in metricas:
-                    valor = lista_resumo_balanco[i + 1].replace(',', '.')
+                    valor = lista_resumo_balanco[i + 1].replace(",", ".")
                     dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
 
-        df_resumo_balanco['datas'] = datas
+        df_resumo_balanco["datas"] = datas
 
         df_resumo_balanco = df_resumo_balanco.rename(
             columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower()
@@ -181,12 +183,12 @@ class PrecosRelativosDataScraper:
             for i in range(0, len(lista_resumo_balanco)):
                 chave = lista_resumo_balanco[i]
                 if chave in metricas:
-                    valor = lista_resumo_balanco[i + 1].replace(',', '.')
+                    valor = lista_resumo_balanco[i + 1].replace(",", ".")
                     dados[chave].append(valor)
 
         df_resumo_balanco = pd.DataFrame(dados)
 
-        df_resumo_balanco['datas'] = datas
+        df_resumo_balanco["datas"] = datas
 
         df_resumo_balanco = df_resumo_balanco.rename(
             columns=lambda coluna: coluna.replace("/", "_").replace(" ", "_").lower()
@@ -245,7 +247,13 @@ class PrecosRelativosDataScraper:
                     for col in colunas:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
                     df_dados["dividend_yield"] = (
-                        pd.to_numeric(df_dados["dividend_yield"].str.replace('%', '').str.replace(',', '.'),errors='coerce') / 100
+                        pd.to_numeric(
+                            df_dados["dividend_yield"]
+                            .str.replace("%", "")
+                            .str.replace(",", "."),
+                            errors="coerce",
+                        )
+                        / 100
                     )
                     df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
                 else:
@@ -269,7 +277,15 @@ class PrecosRelativosDataScraper:
                     for col in colunas:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
 
-                    df_dados['dividend_yield'] = pd.to_numeric(df_dados["dividend_yield"].str.replace('%', '').str.replace(',', '.'),errors='coerce') / 100
+                    df_dados["dividend_yield"] = (
+                        pd.to_numeric(
+                            df_dados["dividend_yield"]
+                            .str.replace("%", "")
+                            .str.replace(",", "."),
+                            errors="coerce",
+                        )
+                        / 100
+                    )
 
                     df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
 

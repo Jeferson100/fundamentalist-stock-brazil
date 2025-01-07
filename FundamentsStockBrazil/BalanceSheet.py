@@ -19,7 +19,8 @@ class TabelaResumoDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
+        #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -45,12 +46,12 @@ class TabelaResumoDataScraper:
             try:
                 select_element = navegador.find_element(
                     By.XPATH,
-                    "/html/body/div[1]/div[4]/div[2]/div[2]/div[3]/table/thead/tr/th[2]/select",
+                    '//*[@id="tabela_resumo_empresa_bp"]/thead/tr/th[2]/select',
                 )
                 select = Select(select_element)
                 select.select_by_visible_text(data)
 
-                tabela = navegador.find_element(By.ID, "pagina_empresa_bp")
+                tabela = navegador.find_element(By.ID, "tabela_resumo_empresa_bp")
 
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
@@ -66,18 +67,17 @@ class TabelaResumoDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "caixa_equivalentes_caixa": [np.nan] * len(datas),
-            "ativo_total": [],
-            "divida_curto_prazo": [np.nan] * len(datas),
-            "divida_longo_prazo": [np.nan] * len(datas),
-            "divida_bruta": [np.nan] * len(datas),
-            "divida_liquida": [np.nan] * len(datas),
-            "patrimonio_liquido": [],
-            "valor_patrimonial_acao": [],
-            "acoes_ordinarias": [],
-            "acoes_preferenciais": [],
-            "total": [],
+            "Caixa e Equivalentes de Caixa": [np.nan] * len(datas),
+            "Ativo Total": [],
+            "Dívida de Curto Prazo": [np.nan] * len(datas),
+            "Dívida de Longo Prazo": [np.nan] * len(datas),
+            "Dívida Bruta": [np.nan] * len(datas),
+            "Dívida Líquida": [np.nan] * len(datas),
+            "Patrimônio Líquido": [],
+            "Valor Patrimonial da Ação": [],
+            "Ações Ordinárias": [],
+            "Ações Preferenciais": [],
+            "Total": [],
         }
         for data in datas:
             while True:
@@ -86,43 +86,66 @@ class TabelaResumoDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["ativo_total"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["patrimonio_liquido"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["valor_patrimonial_acao"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["acoes_ordinarias"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["acoes_preferenciais"].append(
-                lista_resumo_balanco[9].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["total"].append(
-                lista_resumo_balanco[11].replace("R$", "").replace(",", ".").strip()
-            )
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in [
+                    "Caixa e Equivalentes de Caixa",
+                    "Dívida de Curto Prazo",
+                    "Dívida de Longo Prazo",
+                    "Dívida Bruta",
+                    "Dívida Líquida",
+                ]:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        df_resumo_balanco["datas"] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "Caixa e Equivalentes de Caixa": "caixa_equivalentes_caixa",
+                "Ativo Total": "ativo_total",
+                "Dívida de Curto Prazo": "divida_curto_prazo",
+                "Dívida de Longo Prazo": "divida_longo_prazo",
+                "Dívida Bruta": "divida_bruta",
+                "Dívida Líquida": "divida_liquida",
+                "Patrimônio Líquido": "patrimonio_liquido",
+                "Valor Patrimonial da Ação": "valor_patrimonial_acao",
+                "Ações Ordinárias": "acoes_ordinarias",
+                "Ações Preferenciais": "acoes_preferenciais",
+                "Total": "total",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "caixa_equivalentes_caixa": [],
-            "ativo_total": [],
-            "divida_curto_prazo": [],
-            "divida_longo_prazo": [],
-            "divida_bruta": [],
-            "divida_liquida": [],
-            "patrimonio_liquido": [],
-            "valor_patrimonial_acao": [],
-            "acoes_ordinarias": [],
-            "acoes_preferenciais": [],
-            "total": [],
+            "Caixa e Equivalentes de Caixa": [],
+            "Ativo Total": [],
+            "Dívida de Curto Prazo": [],
+            "Dívida de Longo Prazo": [],
+            "Dívida Bruta": [],
+            "Dívida Líquida": [],
+            "Patrimônio Líquido": [],
+            "Valor Patrimonial da Ação": [],
+            "Ações Ordinárias": [],
+            "Ações Preferenciais": [],
+            "Total": [],
         }
 
         for data in datas:
@@ -132,41 +155,59 @@ class TabelaResumoDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["caixa_equivalentes_caixa"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["ativo_total"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["divida_curto_prazo"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["divida_longo_prazo"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["divida_bruta"].append(
-                lista_resumo_balanco[9].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["divida_liquida"].append(
-                lista_resumo_balanco[11].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["patrimonio_liquido"].append(
-                lista_resumo_balanco[13].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["valor_patrimonial_acao"].append(
-                lista_resumo_balanco[15].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["acoes_ordinarias"].append(
-                lista_resumo_balanco[17].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["acoes_preferenciais"].append(
-                lista_resumo_balanco[19].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["total"].append(
-                lista_resumo_balanco[21].replace("R$", "").replace(",", ".").strip()
-            )
+            metrics = [
+                "Caixa e Equivalentes de Caixa",
+                "Ativo Total",
+                "Dívida de Curto Prazo",
+                "Dívida de Longo Prazo",
+                "Dívida Bruta",
+                "Dívida Líquida",
+                "Patrimônio Líquido",
+                "Valor Patrimonial da Ação",
+                "Ações Ordinárias",
+                "Ações Preferenciais",
+                "Total",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        navegador.delete_all_cookies()
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco["datas"] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "Caixa e Equivalentes de Caixa": "caixa_equivalentes_caixa",
+                "Ativo Total": "ativo_total",
+                "Dívida de Curto Prazo": "divida_curto_prazo",
+                "Dívida de Longo Prazo": "divida_longo_prazo",
+                "Dívida Bruta": "divida_bruta",
+                "Dívida Líquida": "divida_liquida",
+                "Patrimônio Líquido": "patrimonio_liquido",
+                "Valor Patrimonial da Ação": "valor_patrimonial_acao",
+                "Ações Ordinárias": "acoes_ordinarias",
+                "Ações Preferenciais": "acoes_preferenciais",
+                "Total": "total",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
@@ -175,7 +216,7 @@ class TabelaResumoDataScraper:
         lista_dataframes = []
         acoes_processadas = set()
         for acao in self.acoes:
-
+            time.sleep(10)
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(

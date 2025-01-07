@@ -19,7 +19,8 @@ class RetornosMargensDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
+        #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -45,13 +46,13 @@ class RetornosMargensDataScraper:
             try:
                 select_element = navegador.find_element(
                     By.XPATH,
-                    "/html/body/div[1]/div[4]/div[2]/div[2]/div[2]/table/thead/tr/th[2]/select",
+                    '//*[@id="tabela_resumo_empresa_margens_retornos"]/thead/tr/th[2]/select',
                 )
                 select = Select(select_element)
                 select.select_by_visible_text(data)
 
                 tabela = navegador.find_element(
-                    By.ID, "pagina_empresa_margens_retornos"
+                    By.ID, "tabela_resumo_empresa_margens_retornos"
                 )
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
@@ -67,23 +68,23 @@ class RetornosMargensDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "retorno_sobre_capital_tangivel_inicial": [np.nan] * len(datas),
-            "retorno_sobre_capital_investido_inicial": [np.nan] * len(datas),
-            "retorno_sobre_capital_tangivel_inicial_pre_impostos": [np.nan]
+            
+            "Retorno s/ Capital Tangível Inicial": [np.nan] * len(datas),
+            "Retorno s/ Capital Investido Inicial": [np.nan] * len(datas),
+            "Retorno s/ Capital Tangível Inicial Pré-Impostos": [np.nan]
             * len(datas),
-            "retorno_sobre_capital_investido_inicial_pre_impostos": [np.nan]
+            "Retorno s/ Capital Investido Inicial Pré-Impostos": [np.nan]
             * len(datas),
-            "retorno_sobre_patrimonio_liquido_inicial": [],
-            "retorno_sobre_ativo_inicial": [],
-            "margem_bruta": [],
-            "margem_liquida": [],
-            "margem_ebit": [np.nan] * len(datas),
-            "margem_ebitda": [np.nan] * len(datas),
-            "giro_do_ativo_inicial": [],
-            "alavancagem_financeira": [],
-            "passivo_patrimonio_liquido": [],
-            "divida_liquida_ebitda": [np.nan] * len(datas),
+            "Retorno s/ Patrimônio Líquido Inicial": [],
+            "Retorno s/ Ativo Inicial": [],
+            "Margem Bruta": [],
+            "Margem Líquida": [],
+            "Margem EBIT": [np.nan] * len(datas),
+            "Margem EBITDA": [np.nan] * len(datas),
+            "Giro do Ativo Inicial": [],
+            "Alavancagem Financeira": [],
+            "Passivo/Patrimônio Líquido": [],
+            "Dívida Líquida/EBITDA": [np.nan] * len(datas),
         }
         for data in datas:
             while True:
@@ -92,77 +93,84 @@ class RetornosMargensDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["retorno_sobre_patrimonio_liquido_inicial"].append(
-                lista_resumo_balanco[1]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_ativo_inicial"].append(
-                lista_resumo_balanco[3]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_bruta"].append(
-                lista_resumo_balanco[5]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_liquida"].append(
-                lista_resumo_balanco[7]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["giro_do_ativo_inicial"].append(
-                lista_resumo_balanco[9]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["alavancagem_financeira"].append(
-                lista_resumo_balanco[11]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["passivo_patrimonio_liquido"].append(
-                lista_resumo_balanco[13]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
+            metrics = [
+                "Retorno s/ Capital Tangível Inicial",
+                "Retorno s/ Capital Investido Inicial",
+                "Retorno s/ Capital Tangível Inicial Pré-Impostos",
+                "Retorno s/ Capital Investido Inicial Pré-Impostos",
+                "Retorno s/ Patrimônio Líquido Inicial",
+                "Retorno s/ Ativo Inicial",
+                "Margem Bruta",
+                "Margem Líquida",
+                "Margem EBIT",
+                "Margem EBITDA",
+                "Giro do Ativo Inicial",
+                "Alavancagem Financeira",
+                "Passivo/Patrimônio Líquido",
+                "Dívida Líquida/EBITDA",
+            ]
 
-        df_resumo_balanco = pd.DataFrame(dados)
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .replace("%", "")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+        
+        df_resumo_balanco["datas"] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "Retorno s/ Capital Tangível Inicial": "retorno_sobre_capital_tangivel_inicial",
+                "Retorno s/ Capital Investido Inicial": "retorno_sobre_capital_investido_inicial",
+                "Retorno s/ Capital Tangível Inicial Pré-Impostos": "retorno_sobre_capital_tangivel_inicial_pre_impostos",
+                "Retorno s/ Capital Investido Inicial Pré-Impostos": "retorno_sobre_capital_investido_inicial_pre_impostos",
+                "Retorno s/ Patrimônio Líquido Inicial": "retorno_sobre_patrimonio_liquido_inicial",
+                "Retorno s/ Ativo Inicial": "retorno_sobre_ativo_inicial",
+                "Margem Bruta": "margem_bruta",
+                "Margem Líquida": "margem_liquida",
+                "Margem EBIT": "margem_ebit",
+                "Margem EBITDA": "margem_ebitda",
+                "Giro do Ativo Inicial": "giro_do_ativo_inicial",
+                "Alavancagem Financeira": "alavancagem_financeira",
+                "Passivo/Patrimônio Líquido": "passivo_patrimonio_liquido",
+                "Dívida Líquida/EBITDA": "divida_liquida_ebitda",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "retorno_sobre_capital_tangivel_inicial": [],
-            "retorno_sobre_capital_investido_inicial": [],
-            "retorno_sobre_capital_tangivel_inicial_pre_impostos": [],
-            "retorno_sobre_capital_investido_inicial_pre_impostos": [],
-            "retorno_sobre_patrimonio_liquido_inicial": [],
-            "retorno_sobre_ativo_inicial": [],
-            "margem_bruta": [],
-            "margem_liquida": [],
-            "margem_ebit": [],
-            "margem_ebitda": [],
-            "giro_do_ativo_inicial": [],
-            "alavancagem_financeira": [],
-            "passivo_patrimonio_liquido": [],
-            "divida_liquida_ebitda": [],
+            "Retorno s/ Capital Tangível Inicial": [],
+            "Retorno s/ Capital Investido Inicial": [],
+            "Retorno s/ Capital Tangível Inicial Pré-Impostos": [],
+            "Retorno s/ Capital Investido Inicial Pré-Impostos": [],
+            "Retorno s/ Patrimônio Líquido Inicial": [],
+            "Retorno s/ Ativo Inicial": [],
+            "Margem Bruta": [],
+            "Margem Líquida": [],
+            "Margem EBIT": [],
+            "Margem EBITDA": [],
+            "Giro do Ativo Inicial": [],
+            "Alavancagem Financeira": [],
+            "Passivo/Patrimônio Líquido": [],
+            "Dívida Líquida/EBITDA": [],
         }
 
         for data in datas:
@@ -172,106 +180,65 @@ class RetornosMargensDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["retorno_sobre_capital_tangivel_inicial"].append(
-                lista_resumo_balanco[1]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_capital_investido_inicial"].append(
-                lista_resumo_balanco[3]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_capital_tangivel_inicial_pre_impostos"].append(
-                lista_resumo_balanco[5]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_capital_investido_inicial_pre_impostos"].append(
-                lista_resumo_balanco[7]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_patrimonio_liquido_inicial"].append(
-                lista_resumo_balanco[9]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["retorno_sobre_ativo_inicial"].append(
-                lista_resumo_balanco[11]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_bruta"].append(
-                lista_resumo_balanco[13]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_liquida"].append(
-                lista_resumo_balanco[15]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_ebit"].append(
-                lista_resumo_balanco[17]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["margem_ebitda"].append(
-                lista_resumo_balanco[19]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["giro_do_ativo_inicial"].append(
-                lista_resumo_balanco[21]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["alavancagem_financeira"].append(
-                lista_resumo_balanco[23]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["passivo_patrimonio_liquido"].append(
-                lista_resumo_balanco[25]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
-            dados["divida_liquida_ebitda"].append(
-                lista_resumo_balanco[27]
-                .replace("R$", "")
-                .replace(",", ".")
-                .replace("%", "")
-                .strip()
-            )
+            metrics = [
+                "Retorno s/ Capital Tangível Inicial",
+                "Retorno s/ Capital Investido Inicial",
+                "Retorno s/ Capital Tangível Inicial Pré-Impostos",
+                "Retorno s/ Capital Investido Inicial Pré-Impostos",
+                "Retorno s/ Patrimônio Líquido Inicial",
+                "Retorno s/ Ativo Inicial",
+                "Margem Bruta",
+                "Margem Líquida",
+                "Margem EBIT",
+                "Margem EBITDA",
+                "Giro do Ativo Inicial",
+                "Alavancagem Financeira",
+                "Passivo/Patrimônio Líquido",
+                "Dívida Líquida/EBITDA",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .replace("%", "")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+        
+        df_resumo_balanco["datas"] = datas
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        df_resumo_balanco.rename(
+            columns={
+                "Retorno s/ Capital Tangível Inicial": "retorno_sobre_capital_tangivel_inicial",
+                "Retorno s/ Capital Investido Inicial": "retorno_sobre_capital_investido_inicial",
+                "Retorno s/ Capital Tangível Inicial Pré-Impostos": "retorno_sobre_capital_tangivel_inicial_pre_impostos",
+                "Retorno s/ Capital Investido Inicial Pré-Impostos": "retorno_sobre_capital_investido_inicial_pre_impostos",
+                "Retorno s/ Patrimônio Líquido Inicial": "retorno_sobre_patrimonio_liquido_inicial",
+                "Retorno s/ Ativo Inicial": "retorno_sobre_ativo_inicial",
+                "Margem Bruta": "margem_bruta",
+                "Margem Líquida": "margem_liquida",
+                "Margem EBIT": "margem_ebit",
+                "Margem EBITDA": "margem_ebitda",
+                "Giro do Ativo Inicial": "giro_do_ativo_inicial",
+                "Alavancagem Financeira": "alavancagem_financeira",
+                "Passivo/Patrimônio Líquido": "passivo_patrimonio_liquido",
+                "Dívida Líquida/EBITDA": "divida_liquida_ebitda",
+            },
+            inplace=True,
+        )
+
 
         return df_resumo_balanco
 
@@ -280,7 +247,7 @@ class RetornosMargensDataScraper:
         lista_dataframes = []
         acoes_processadas = set()
         for acao in self.acoes:
-
+            time.sleep(10)
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
@@ -290,7 +257,10 @@ class RetornosMargensDataScraper:
             if acao in acoes_processadas:
                 print(f"Ação {acao} já processada, pulando.")
 
-            elif "código de negociação não encontrado." in elemento_text[0].text:
+            elif (
+                elemento_text
+                and "código de negociação não encontrado." in elemento_text[0].text
+            ):
                 print(f"Código de negociação {acao} não encontrado.")
 
             else:
@@ -341,6 +311,7 @@ class RetornosMargensDataScraper:
                         )
 
                 df_dados["tic"] = acao
+
                 lista_dataframes.append(df_dados)
 
                 iteracao += 1

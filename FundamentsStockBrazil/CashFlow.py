@@ -8,7 +8,7 @@ from selenium.common.exceptions import (
 
 import time
 import pandas as pd
-
+import numpy as np
 
 
 class FluxoCaixaDataScraper:
@@ -20,7 +20,8 @@ class FluxoCaixaDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
+        #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -68,12 +69,12 @@ class FluxoCaixaDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "fluxo_caixa_operacional": [],
-            "fluxo_caixa_investimentos": [],
-            "fluxo_caixa_financiamento": [],
-            "aumento_reducao_caixa_equivalentes": [],
+            "Fluxo de Caixa Operacional": [],
+            "Fluxo de Caixa de Investimentos": [],
+            "Fluxo de Caixa de Financiamentos": [],
+            "Aumento (Redução) de Caixa e Equivalentes": [],
         }
+
         for data in datas:
             while True:
                 lista_resumo_balanco = self.obter_dados_tabela(
@@ -81,30 +82,54 @@ class FluxoCaixaDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["fluxo_caixa_operacional"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_investimentos"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_financiamento"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["aumento_reducao_caixa_equivalentes"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
+            
+            metrics = [
+                "Fluxo de Caixa Operacional",
+                "Fluxo de Caixa de Investimentos",
+                "Fluxo de Caixa de Financiamentos",
+                "Aumento (Redução) de Caixa e Equivalentes",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+        
+        df_resumo_balanco["datas"] = datas
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        df_resumo_balanco.rename(
+            columns={
+                "Fluxo de Caixa Operacional": "fluxo_caixa_operacional",
+                "Fluxo de Caixa de Investimentos": "fluxo_caixa_investimentos",
+                "Fluxo de Caixa de Financiamentos": "fluxo_caixa_financiamento",
+                "Aumento (Redução) de Caixa e Equivalentes": "aumento_reducao_caixa_equivalentes",
+            },
+            inplace=True,
+        )
+
 
         return df_resumo_balanco
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "fluxo_caixa_operacional": [],
-            "fluxo_caixa_investimentos": [],
-            "fluxo_caixa_financiamento": [],
-            "aumento_reducao_caixa_equivalentes": [],
+            "Fluxo de Caixa Operacional": [],
+            "Fluxo de Caixa de Investimentos": [],
+            "Fluxo de Caixa de Financiamentos": [],
+            "Aumento (Redução) de Caixa e Equivalentes": [],
         }
 
         for data in datas:
@@ -114,20 +139,44 @@ class FluxoCaixaDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["fluxo_caixa_operacional"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_investimentos"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_financiamento"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["aumento_reducao_caixa_equivalentes"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
+            metrics = [
+                "Fluxo de Caixa Operacional",
+                "Fluxo de Caixa de Investimentos",
+                "Fluxo de Caixa de Financiamentos",
+                "Aumento (Redução) de Caixa e Equivalentes",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco["datas"] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "Fluxo de Caixa Operacional": "fluxo_caixa_operacional",
+                "Fluxo de Caixa de Investimentos": "fluxo_caixa_investimentos",
+                "Fluxo de Caixa de Financiamentos": "fluxo_caixa_financiamento",
+                "Aumento (Redução) de Caixa e Equivalentes": "aumento_reducao_caixa_equivalentes",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
@@ -136,7 +185,7 @@ class FluxoCaixaDataScraper:
         lista_dataframes = []
         acoes_processadas = set()
         for acao in self.acoes:
-
+            time.sleep(10)
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
@@ -146,7 +195,10 @@ class FluxoCaixaDataScraper:
             if acao in acoes_processadas:
                 print(f"Ação {acao} já processada, pulando.")
 
-            elif "código de negociação não encontrado." in elemento_text[0].text:
+            elif (
+                elemento_text
+                and "código de negociação não encontrado." in elemento_text[0].text
+            ):
                 print(f"Código de negociação {acao} não encontrado.")
 
             else:

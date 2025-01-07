@@ -19,7 +19,8 @@ class CapexDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        navegador = webdriver.Chrome(service=self.service, options=self.options)
+        #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -50,7 +51,7 @@ class CapexDataScraper:
                 select = Select(select_element)
                 select.select_by_visible_text(data)
 
-                tabela = navegador.find_element(By.ID, "pagina_empresa_experimental")
+                tabela = navegador.find_element(By.ID, "tabela_resumo_empresa_experimental")
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
                 lista_resumo_balanco = []
@@ -65,11 +66,10 @@ class CapexDataScraper:
 
     def coletar_dados_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "capex_tres_meses": [],
-            "fluxo_caixa_livre_tres_meses": [np.nan] * len(datas),
-            "capex_doze_meses": [],
-            "fluxo_caixa_livre_doze_meses": [np.nan] * len(datas),
+            "CAPEX 3 meses": [],
+            "Fluxo de Caixa Livre 3 meses": [np.nan] * len(datas),
+            "CAPEX 12 meses": [],
+            "Fluxo de Caixa Livre 12 meses": [np.nan] * len(datas),
         }
         for data in datas:
             while True:
@@ -78,24 +78,53 @@ class CapexDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["capex_tres_meses"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["capex_doze_meses"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
+            metrics = [
+                "CAPEX 3 meses",
+                "Fluxo de Caixa Livre 3 meses",
+                "CAPEX 12 meses",
+                "Fluxo de Caixa Livre 12 meses",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
+
+        df_resumo_balanco['datas'] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "CAPEX 3 meses": "capex_tres_meses",
+                "Fluxo de Caixa Livre 3 meses": "fluxo_caixa_livre_tres_meses",
+                "CAPEX 12 meses": "capex_doze_meses",
+                "Fluxo de Caixa Livre 12 meses": "fluxo_caixa_livre_doze_meses",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
     def coletar_dados_nao_financeiros(self, navegador, datas):
         dados = {
-            "datas": datas,
-            "capex_tres_meses": [],
-            "fluxo_caixa_livre_tres_meses": [],
-            "capex_doze_meses": [],
-            "fluxo_caixa_livre_doze_meses": [],
+            "CAPEX 3 meses": [], 
+            "Fluxo de Caixa Livre 3 meses": [], 
+            "CAPEX 12 meses": [], 
+            "Fluxo de Caixa Livre 12 meses": [],
         }
 
         for data in datas:
@@ -105,20 +134,43 @@ class CapexDataScraper:
                 )
                 if lista_resumo_balanco:
                     break
-            dados["capex_tres_meses"].append(
-                lista_resumo_balanco[1].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_livre_tres_meses"].append(
-                lista_resumo_balanco[3].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["capex_doze_meses"].append(
-                lista_resumo_balanco[5].replace("R$", "").replace(",", ".").strip()
-            )
-            dados["fluxo_caixa_livre_doze_meses"].append(
-                lista_resumo_balanco[7].replace("R$", "").replace(",", ".").strip()
-            )
+            metrics = [
+                "CAPEX 3 meses",
+                "Fluxo de Caixa Livre 3 meses",
+                "CAPEX 12 meses",
+                "Fluxo de Caixa Livre 12 meses",
+            ]
+            for i in range(0, len(lista_resumo_balanco)):
+                chave = lista_resumo_balanco[i]
+                if chave in metrics:
+                    valor = (
+                        lista_resumo_balanco[i + 1]
+                        .replace("R$", "")
+                        .replace(",", ".")
+                        .strip()
+                    )
+                    dados[chave].append(valor)
+                else:
+                    continue
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        df_resumo_balanco['datas'] = datas
+
+        df_resumo_balanco.rename(
+            columns={
+                "CAPEX 3 meses": "capex_tres_meses",
+                "Fluxo de Caixa Livre 3 meses": "fluxo_caixa_livre_tres_meses",
+                "CAPEX 12 meses": "capex_doze_meses",
+                "Fluxo de Caixa Livre 12 meses": "fluxo_caixa_livre_doze_meses",
+            },
+            inplace=True,
+        )
 
         return df_resumo_balanco
 
@@ -127,7 +179,7 @@ class CapexDataScraper:
         lista_dataframes = []
         acoes_processadas = set()
         for acao in self.acoes:
-
+            time.sleep(10)
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
@@ -137,7 +189,10 @@ class CapexDataScraper:
             if acao in acoes_processadas:
                 print(f"Ação {acao} já processada, pulando.")
 
-            elif "código de negociação não encontrado." in elemento_text[0].text:
+            elif (
+                elemento_text
+                and "código de negociação não encontrado." in elemento_text[0].text
+            ):
                 print(f"Código de negociação {acao} não encontrado.")
 
             else:
@@ -154,11 +209,7 @@ class CapexDataScraper:
                         df_dados = self.coletar_dados_financeiros(
                             navegador=navegador, datas=datas
                         )
-                    colunas = df_dados.columns[
-                        (df_dados.columns != "fluxo_caixa_livre_3_meses")
-                        & (df_dados.columns != "fluxo_caixa_livre_12_meses")
-                        & (df_dados.columns != "datas")
-                    ]
+                    colunas =['capex_tres_meses', 'capex_doze_meses']
                     for col in colunas:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
                 else:
@@ -170,6 +221,12 @@ class CapexDataScraper:
                         df_dados = self.coletar_dados_nao_financeiros(
                             navegador=navegador, datas=datas
                         )
+                    colunas = [
+                        "capex_tres_meses",
+                        "fluxo_caixa_livre_tres_meses",
+                        "capex_doze_meses",
+                        "fluxo_caixa_livre_doze_meses",
+                    ]
                     for col in df_dados.columns[(df_dados.columns != "datas")]:
                         df_dados[col] = df_dados[col].apply(self.converter_valor)
 
