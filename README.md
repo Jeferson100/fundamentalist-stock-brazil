@@ -197,12 +197,6 @@ acoes = ['ABEV3', 'AZUL4', 'B3SA3']
 # Definição do setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
-
 # Configurações do Chrome
 options = Options()
 options.add_argument("--headless")  # Executar em modo headless
@@ -212,7 +206,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = TabelaResumoDataScraper(setor_financeiro, options, service, acoes=acoes, diretorio='../dados/resumo_balanco.csv')
+scraper = TabelaResumoDataScraper(setor_financeiro, options, acoes=acoes, diretorio='../dados/resumo_balanco.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -456,11 +450,6 @@ acoes = ['ABEV3', 'AZUL4', 'B3SA3']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
 
 # Configurações do Chrome
 options = Options()
@@ -471,7 +460,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = DreDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
+scraper = DreDataScraper(setor_financeiro, options,acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -663,12 +652,6 @@ codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
-
 # Configurações do Chrome
 options = Options()
 options.add_argument("--headless")  # Executar em modo headless
@@ -678,7 +661,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = CapexDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/capex.csv')
+scraper = CapexDataScraper(setor_financeiro, options, acoes=codigos_ibovespa, diretorio='../dados/capex.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -832,11 +815,6 @@ codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
 
 # Configurações do Chrome
 options = Options()
@@ -847,7 +825,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = PrecosRelativosDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/precos_relativos.csv')
+scraper = PrecosRelativosDataScraper(setor_financeiro, options, acoes=codigos_ibovespa, diretorio='../dados/precos_relativos.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -1168,11 +1146,6 @@ codigos_ibovespa = ['BBAS3', 'BBDC3', 'BBDC4']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
 
 # Configurações do Chrome
 options = Options()
@@ -1183,7 +1156,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = RetornosMargensDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/retornos_margens.csv')
+scraper = RetornosMargensDataScraper(setor_financeiro, options, acoes=codigos_ibovespa, diretorio='../dados/retornos_margens.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -1455,12 +1428,6 @@ codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
-
 # Configurações do Chrome
 options = Options()
 options.add_argument("--headless")  # Executar em modo headless
@@ -1470,7 +1437,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = FluxoCaixaDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/fluxo_caixa.csv')
+scraper = FluxoCaixaDataScraper(setor_financeiro, options,acoes=codigos_ibovespa, diretorio='../dados/fluxo_caixa.csv')
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
@@ -1624,11 +1591,6 @@ codigos_ibovespa = ['ABEV3', 'AZUL4', 'B3SA3']
 # Define o setor financeiro
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'SANB11', 'IRBR3'}
 
-# Caminho para o driver do Chrome
-chrome_driver_path = "/usr/bin/chromedriver"
-
-# Configuração do serviço do Chrome
-service = Service(executable_path=chrome_driver_path)
 
 # Configurações do Chrome
 options = Options()
@@ -1639,7 +1601,7 @@ options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
 # Inicializa o scraper
-scraper = SetorDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa)
+scraper = SetorDataScraper(setor_financeiro, options,acoes=codigos_ibovespa)
 
 # Executa a coleta de dados
 dados = scraper.rodar_acoes()
