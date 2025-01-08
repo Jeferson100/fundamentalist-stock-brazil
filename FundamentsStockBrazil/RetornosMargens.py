@@ -290,7 +290,7 @@ class RetornosMargensDataScraper:
                     ]
                     for col in colunas:
                         df_dados[col] = (
-                            pd.to_numeric(df_dados[col], errors="coerce") / 100
+                            round(pd.to_numeric(df_dados[col], errors="coerce") / 100, 3)
                         )
                 else:
                     try:
@@ -311,7 +311,7 @@ class RetornosMargensDataScraper:
                     ]
                     for col in colunas:
                         df_dados[col] = (
-                            pd.to_numeric(df_dados[col], errors="coerce") / 100
+                            round(pd.to_numeric(df_dados[col], errors="coerce") / 100, 3)
                         )
 
                 df_dados["tic"] = acao
