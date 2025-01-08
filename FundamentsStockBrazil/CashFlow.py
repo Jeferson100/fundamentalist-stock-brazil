@@ -189,7 +189,7 @@ class FluxoCaixaDataScraper:
             navegador = self.navegador_get(acao=acao)
 
             elemento_text = navegador.find_elements(
-                By.XPATH, "/html/body/div[1]/div[4]/div[2]"
+                By.XPATH, '//*[@id="main-content"]/div[2]/div/p[1]'
             )
 
             if acao in acoes_processadas:
