@@ -30,8 +30,11 @@ class SetorDataScraper:
     def obter_dados_tabela(self, navegador):
         while True:
             try:
+                time.sleep(1)
                 tabela = navegador.find_element(By.ID, "dados_basicos")
+                time.sleep(1)
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
+                time.sleep(1)
                 lista_dados_basicos = []
                 for linha in linhas:
                     # Pegar as células de cada linha
