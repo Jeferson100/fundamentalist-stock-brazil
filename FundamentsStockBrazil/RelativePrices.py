@@ -13,7 +13,7 @@ import time
 
 
 class PrecosRelativosDataScraper:
-    def __init__(self, setor_financeiro, options, service, acoes, diretorio=None):
+    def __init__(self, setor_financeiro, options, acoes, service=None,  diretorio=None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
@@ -21,22 +21,14 @@ class PrecosRelativosDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        try:
-            #navegador = webdriver.Chrome(service=self.service, options=self.options)
+        if self.service is not None:
+            navegador = webdriver.Chrome(service=self.service, options=self.options)
+        else:   
             navegador = webdriver.Chrome(options=self.options)
-            navegador.get(
-                f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
-            )
-            return navegador
-        except WebDriverException:
-            print("Erro WebDriverException")
-            time.sleep(5)
-            #navegador = webdriver.Chrome(service=self.service, options=self.options)
-            navegador = webdriver.Chrome(options=self.options)
-            navegador.get(
-                f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
-            )
-            return navegador
+        navegador.get(
+            f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
+        )
+        return navegador
 
     def obter_datas(self, navegador):
         while True:
@@ -185,8 +177,17 @@ class PrecosRelativosDataScraper:
                 if chave in metricas:
                     valor = lista_resumo_balanco[i + 1].replace(",", ".")
                     dados[chave].append(valor)
+            lista_resumo_balanco.clear()
+        
+        navegador.delete_all_cookies()
 
-        df_resumo_balanco = pd.DataFrame(dados)
+        try:
+            df_resumo_balanco = pd.DataFrame(dados)
+        except ValueError:
+            for key in dados.keys():
+                if len(dados[key]) == 0:
+                    dados[key].extend([np.nan] * len(datas))
+            df_resumo_balanco = pd.DataFrame(dados)
 
         df_resumo_balanco["datas"] = datas
 

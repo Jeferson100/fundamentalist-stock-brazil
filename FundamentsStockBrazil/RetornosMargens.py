@@ -11,7 +11,7 @@ import numpy as np
 
 
 class RetornosMargensDataScraper:
-    def __init__(self, setor_financeiro, options, service, acoes, diretorio=None):
+    def __init__(self, setor_financeiro, options, acoes, service=None, diretorio=None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
@@ -19,8 +19,10 @@ class RetornosMargensDataScraper:
         self.diretorio = diretorio
 
     def navegador_get(self, acao):
-        #navegador = webdriver.Chrome(service=self.service, options=self.options)
-        navegador = webdriver.Chrome(options=self.options)
+        if self.service is not None:
+            navegador = webdriver.Chrome(service=self.service, options=self.options)
+        else:
+            navegador = webdriver.Chrome(options=self.options)
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
@@ -209,6 +211,8 @@ class RetornosMargensDataScraper:
                     dados[chave].append(valor)
                 else:
                     continue
+            lista_resumo_balanco.clear()
+        navegador.delete_all_cookies()
         try:
             df_resumo_balanco = pd.DataFrame(dados)
         except ValueError:

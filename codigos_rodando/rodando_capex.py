@@ -21,7 +21,7 @@ options.add_argument("--disable-dev-shm-usage")  # Reduz o uso de memória
 options.add_argument("--disable-gpu")  # Desativar o uso de GPU
 options.add_argument("--window-size=1920,1080")  # Definir o tamanho da janela
 
-scraper = CapexDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/capex.csv')
+scraper = CapexDataScraper(setor_financeiro, options, acoes=codigos_ibovespa, diretorio='../dados/capex.csv')
 
 dados = scraper.rodar_acoes()
 

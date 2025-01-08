@@ -27,7 +27,7 @@ options.add_argument("--disable-extensions")  # Desativa extensões
 options.add_argument("--disable-popup-blocking")  # Desativa bloqueio de pop-ups
 options.add_argument("--disable-infobars")  # Desativa a barra de informações
 
-scraper = DreDataScraper(setor_financeiro, options, service, acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
+scraper = DreDataScraper(setor_financeiro, options, acoes=codigos_ibovespa, diretorio='../dados/dre.csv')
 
 dados = scraper.rodar_acoes()
 

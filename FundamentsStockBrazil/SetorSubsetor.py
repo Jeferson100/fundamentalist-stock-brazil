@@ -9,7 +9,7 @@ import pandas as pd
 
 
 class SetorDataScraper:
-    def __init__(self, setor_financeiro, options, service, acoes):
+    def __init__(self, setor_financeiro, options, acoes,service=None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
@@ -17,8 +17,11 @@ class SetorDataScraper:
         self.dados = None
 
     def navegador_get(self, acao):
-        #navegador = webdriver.Chrome(service=self.service, options=self.options)
-        navegador = webdriver.Chrome(options=self.options)
+        if self.service is not None:
+            navegador = webdriver.Chrome(service=self.service, options=self.options)
+        else:
+            navegador = webdriver.Chrome(options=self.options)
+            
         navegador.get(
             f"https://www.investsite.com.br/principais_indicadores.php?cod_negociacao={acao}"
         )
