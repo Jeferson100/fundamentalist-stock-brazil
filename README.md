@@ -187,7 +187,7 @@ A classe `TabelaResumoDataScraper` é responsável por coletar os dados da tabel
 ```python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.BalanceSheet import TabelaResumoDataScraper
+from FundamentsStockBrazil import TabelaResumoDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -440,7 +440,7 @@ A classe `DreDataScraper` é responsável por coletar os dados da tabela de DRE.
 ```python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.IncomeStatement import DreDataScraper
+from FundamentsStockBrazil import DreDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -642,7 +642,7 @@ A classe `CapexDataScraper` é responsável por fazer o web scraping dos dados d
 ```python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.CapitalExpenditure import CapexDataScraper
+from FundamentsStockBrazil import CapexDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -805,7 +805,7 @@ A classe `PrecosRelativosDataScraper` tem como objetivo baixar dados de indicado
 ```python
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.RelativePrices import PrecosRelativosDataScraper
+from FundamentsStockBrazil import PrecosRelativosDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -1136,7 +1136,7 @@ A classe `RetornosMargensDataScraper` tem como objetivo baixar dados de indicado
 
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.RetornosMargens import RetornosMargensDataScraper
+from FundamentsStockBrazil import RetornosMargensDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -1418,7 +1418,7 @@ A classe `FluxoCaixaDataScraper` tem como objetivo baixar dados de fluxo de caix
 ```python	
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.CashFlow import FluxoCaixaDataScraper
+from FundamentsStockBrazil import FluxoCaixaDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
@@ -1581,7 +1581,7 @@ A classe `SetorDataScraper` tem como objetivo baixar dados de setores das açõe
 
 import sys
 sys.path.append('..')
-from FundamentsStockBrazil.SetorSubsetor import SetorDataScraper
+from FundamentsStockBrazil import SetorDataScraper
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
