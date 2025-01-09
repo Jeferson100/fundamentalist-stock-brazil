@@ -47,24 +47,24 @@ class TabelaResumoDataScraper:
     def obter_dados_tabela(self, navegador, data):
         while True:
             try:
-                time.sleep(1)
+                time.sleep(0.5)
                 select_element = navegador.find_element(
                     By.XPATH,
                     '//*[@id="tabela_resumo_empresa_bp"]/thead/tr/th[2]/select',
                 )
-                time.sleep(1)
+                time.sleep(0.5)
 
                 select = Select(select_element)
 
                 time.sleep(1)
-                
+
                 select.select_by_visible_text(data)
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 tabela = navegador.find_element(By.ID, "tabela_resumo_empresa_bp")
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 

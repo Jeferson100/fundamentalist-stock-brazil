@@ -48,24 +48,24 @@ class PrecosRelativosDataScraper:
     def obter_dados_tabela(self, navegador, data):
         while True:
             try:
-                time.sleep(1)
+                time.sleep(0.5)
                 select_element = navegador.find_element(
                     By.XPATH,
                     "/html/body/div[3]/div/div[2]/div/div[2]/main/div[2]/div[1]/section[2]/div/table/thead/tr/th[2]/select",
                 )
-                time.sleep(1)
+                time.sleep(0.5)
 
                 select = Select(select_element)
 
-                time.sleep(1)
-                
+                time.sleep(0.5)
+
                 select.select_by_visible_text(data)
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 tabela = navegador.find_element(By.ID, "precos_relativos")
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
