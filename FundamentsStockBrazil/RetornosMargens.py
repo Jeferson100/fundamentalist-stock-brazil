@@ -8,15 +8,17 @@ from selenium.common.exceptions import (
 import time
 import pandas as pd
 import numpy as np
+import datetime
 
 
 class RetornosMargensDataScraper:
-    def __init__(self, setor_financeiro, options, acoes, service=None, diretorio=None):
+    def __init__(self, setor_financeiro, options, acoes, service=None, diretorio=None, data_inicio:str = None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
         self.acoes = acoes
         self.diretorio = diretorio
+        self.data_inicio = data_inicio
 
     def navegador_get(self, acao):
         if self.service is not None:
@@ -39,6 +41,11 @@ class RetornosMargensDataScraper:
                 if len(datas) == 1:
                     string_de_datas = datas[0]
                     datas = string_de_datas.split("\n")
+                if 'Atual' in datas[0]:
+                    datas[0] = datas[0].replace('Atual - ', '')
+                if self.data_inicio:
+                    data_referencia = datetime.datetime.strptime(self.data_inicio, '%d/%m/%Y')
+                    datas = [data for data in datas if datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
                 return datas
             except StaleElementReferenceException:
                 continue
@@ -297,6 +304,8 @@ class RetornosMargensDataScraper:
                         df_dados[col] = (
                             round(pd.to_numeric(df_dados[col], errors="coerce") / 100, 3)
                         )
+                    
+                    df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
                 else:
                     try:
                         df_dados = self.coletar_dados_nao_financeiros(
@@ -318,6 +327,8 @@ class RetornosMargensDataScraper:
                         df_dados[col] = (
                             round(pd.to_numeric(df_dados[col], errors="coerce") / 100, 3)
                         )
+                        
+                    df_dados["datas"] = df_dados["datas"].apply(self.converter_data)
 
                 df_dados["tic"] = acao
 
@@ -364,3 +375,8 @@ class RetornosMargensDataScraper:
                 return float("nan")
         else:
             return valor
+    
+    def converter_data(self, valor):
+        if "Atual - " in valor:
+            return valor.replace("Atual - ", "")
+        return valor

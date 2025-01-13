@@ -8,15 +8,17 @@ from selenium.common.exceptions import (
 import time
 import pandas as pd
 import numpy as np
+import datetime
 
 
 class CapexDataScraper:
-    def __init__(self, setor_financeiro, options, acoes, service=None, diretorio=None):
+    def __init__(self, setor_financeiro, options, acoes, service=None, diretorio=None, data_inicio:str = None):
         self.setor_financeiro = setor_financeiro
         self.options = options
         self.service = service
         self.acoes = acoes
         self.diretorio = diretorio
+        self.data_inicio = data_inicio
 
     def navegador_get(self, acao):
         if self.service is not None:
@@ -39,6 +41,11 @@ class CapexDataScraper:
                 if len(datas) == 1:
                     string_de_datas = datas[0]
                     datas = string_de_datas.split("\n")
+                if 'Atual' in datas[0]:
+                    datas[0] = datas[0].replace('Atual - ', '')
+                if self.data_inicio:
+                    data_referencia = datetime.datetime.strptime(self.data_inicio, '%d/%m/%Y')
+                    datas = [data for data in datas if datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
                 return datas
             except StaleElementReferenceException:
                 continue
