@@ -41,11 +41,9 @@ class CapexDataScraper:
                 if len(datas) == 1:
                     string_de_datas = datas[0]
                     datas = string_de_datas.split("\n")
-                if 'Atual' in datas[0]:
-                    datas[0] = datas[0].replace('Atual - ', '')
                 if self.data_inicio:
                     data_referencia = datetime.datetime.strptime(self.data_inicio, '%d/%m/%Y')
-                    datas = [data for data in datas if datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
+                    datas = [data for data in datas if 'Atual' in data or datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
                 return datas
             except StaleElementReferenceException:
                 continue

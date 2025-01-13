@@ -42,11 +42,9 @@ class PrecosRelativosDataScraper:
                 if len(datas) == 1:
                     string_de_datas = datas[0]
                     datas = string_de_datas.split("\n")
-                if 'Atual' in datas[0]:
-                    datas[0] = datas[0].replace('Atual - ', '')
                 if self.data_inicio:
                     data_referencia = datetime.datetime.strptime(self.data_inicio, '%d/%m/%Y')
-                    datas = [data for data in datas if datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
+                    datas = [data for data in datas if 'Atual' in data or datetime.datetime.strptime(data, '%d/%m/%Y') >= data_referencia]
                 return datas
             except StaleElementReferenceException:
                 continue
@@ -57,7 +55,7 @@ class PrecosRelativosDataScraper:
                 time.sleep(0.5)
                 select_element = navegador.find_element(
                     By.XPATH,
-                    "/html/body/div[3]/div/div[2]/div/div[2]/main/div[2]/div[1]/section[2]/div/table/thead/tr/th[2]/select",
+                    '//*[@id="tabela_resumo_empresa_precos_relativos"]/thead/tr/th[2]/select',
                 )
                 time.sleep(0.5)
 
