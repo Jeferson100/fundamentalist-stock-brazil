@@ -53,24 +53,24 @@ class TabelaResumoDataScraper:
     def obter_dados_tabela(self, navegador, data):
         while True:
             try:
-                time.sleep(0.5)
+                time.sleep(0.2)
                 select_element = navegador.find_element(
                     By.XPATH,
                     '//*[@id="tabela_resumo_empresa_bp"]/thead/tr/th[2]/select',
                 )
-                time.sleep(0.5)
+                time.sleep(0.2)
 
                 select = Select(select_element)
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 select.select_by_visible_text(data)
 
-                time.sleep(0.5)
+                time.sleep(0.2)
 
                 tabela = navegador.find_element(By.ID, "tabela_resumo_empresa_bp")
 
-                time.sleep(0.5)
+                time.sleep(0.2)
 
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
@@ -108,11 +108,12 @@ class TabelaResumoDataScraper:
             for i in range(0, len(lista_resumo_balanco)):
                 chave = lista_resumo_balanco[i]
                 if chave in [
-                    "Caixa e Equivalentes de Caixa",
-                    "Dívida de Curto Prazo",
-                    "Dívida de Longo Prazo",
-                    "Dívida Bruta",
-                    "Dívida Líquida",
+                    "Ativo Total",
+                    "Patrimônio Líquido",
+                    "Valor Patrimonial da Ação",
+                    "Ações Ordinárias",
+                    "Ações Preferenciais",
+                    "Total",
                 ]:
                     valor = (
                         lista_resumo_balanco[i + 1]

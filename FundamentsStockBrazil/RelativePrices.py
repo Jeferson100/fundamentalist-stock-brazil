@@ -52,16 +52,16 @@ class PrecosRelativosDataScraper:
     def obter_dados_tabela(self, navegador, data):
         while True:
             try:
-                time.sleep(0.5)
+                time.sleep(0.1)
                 select_element = navegador.find_element(
                     By.XPATH,
                     '//*[@id="tabela_resumo_empresa_precos_relativos"]/thead/tr/th[2]/select',
                 )
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 select = Select(select_element)
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 select.select_by_visible_text(data)
 
@@ -69,7 +69,7 @@ class PrecosRelativosDataScraper:
 
                 tabela = navegador.find_element(By.ID, "precos_relativos")
 
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 linhas = tabela.find_elements(By.TAG_NAME, "tr")
 
