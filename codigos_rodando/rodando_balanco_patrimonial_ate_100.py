@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 with open('codigos_ibovespa.txt', 'r') as f:
     codigos_ibovespa = f.read().splitlines()
-codigos_ibovespa = codigos_ibovespa[:150]
+codigos_ibovespa = codigos_ibovespa[:100]
 
 setor_financeiro = {'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'ITUB4', 'BPAC11', 'ITUB4', 'SANB11'}
 
@@ -27,5 +27,5 @@ scraper = TabelaResumoDataScraper(setor_financeiro, options, acoes=codigos_ibove
 
 dados = scraper.rodar_acoes()
 
-dados.to_csv('../dados/resumo_balanco.csv')
+dados.to_csv('../dados/resumo_balanco_ate_100.csv')
 

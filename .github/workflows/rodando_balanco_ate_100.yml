@@ -1,4 +1,4 @@
-name: Scraping balanco patrimonial
+name: Scraping balanco patrimonial ate 100
 on: 
   schedule:
     - cron: "0 6 15 1,4,7,9 *"
@@ -27,7 +27,7 @@ jobs:
           run: |
             cd ./codigos_rodando
             pwd
-            python rodando_balanco_patrimonial.py
+            python rodando_balanco_patrimonial_ate_100.py
 
         - name: Configure Git
           run: |
