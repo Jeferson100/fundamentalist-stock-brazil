@@ -2,6 +2,8 @@
 
 [![Balanço patrimonial](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/juntando_balanco.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/juntando_balanco.yml)
 [![Scraping Setor](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_setor.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_setor.yml)
+[![Scraping Capex](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml)
+[![Scraping DRE](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml)
 
 
 
