@@ -4,6 +4,9 @@
 [![Scraping Setor](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_setor.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_setor.yml)
 [![Scraping Capex](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_capex.yml)
 [![Scraping DRE](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_dre.yml)
+[![Scraping Precos Relativos](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_precos_relativos.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_precos_relativos.yml)
+[![Scraping Retornos e Margens](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_margens.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_margens.yml)
+[![Scraping Fluxo de caixa](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_fluxo_caixa.yml/badge.svg)](https://github.com/Jeferson100/fundamentalist-stock-brazil/actions/workflows/rodando_fluxo_caixa.yml)
 
 
 

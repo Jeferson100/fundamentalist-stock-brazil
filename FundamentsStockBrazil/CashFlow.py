@@ -282,16 +282,31 @@ class FluxoCaixaDataScraper:
         pd.concat(lista_dataframes).to_csv(self.diretorio)
 
     def converter_valor(self, valor):
-        if isinstance(valor, str):
-            if valor.endswith("T"):
-                return float(valor.replace("T", "").replace(" ", "")) * 1_000_000
-            elif valor.endswith("B"):
-                return float(valor.replace("B", "").replace(" ", "")) * 1_000
-            elif valor.endswith("M"):
-                return float(valor.replace("M", "").replace(" ", "")) * 1
-            elif valor.endswith("K"):
-                return float(valor.replace("K", "").replace(" ", "")) * 0.001
-            elif valor == "NA":
+        valor = str(valor).strip()  # Garante que não há espaços no início ou fim
+        
+        # Padroniza a string (substitui vírgulas decimais por pontos)
+        valor = valor.replace(" ", "").replace(",", ".")  
+        
+        # Remove pontos como separadores de milhar, mantendo apenas o último ponto decimal
+        partes = valor.split(".")
+        if len(partes) > 2:  # Se houver mais de um ponto, então há separador de milhar
+            valor = partes[0] + "".join(partes[1:-1]) + "." + partes[-1]  # Remove os pontos intermediários
+        
+        try:
+            if 'T' in valor:
+                return float(valor.replace("T", "")) * 1_000_000  # Trilhão
+            elif 'B' in valor:
+                return float(valor.replace("B", "")) * 1_000  # Bilhão
+            elif 'M' in valor:
+                return float(valor.replace("M", "")) * 1 # Milhão
+            elif 'K' in valor or 'mil' in valor:
+                return float(valor.replace("K", "").replace("mil", "")) * 0.001  # Mil
+            elif valor.upper() == "NA":  # Trata valores "NA" como NaN
                 return float("nan")
-        else:
-            return valor
+            else:
+                return float(valor)*0.000001 # Converte o valor numérico diretamente
+        except ValueError:
+            return None  # Retorna None caso não seja possível converter
+
+
+       
