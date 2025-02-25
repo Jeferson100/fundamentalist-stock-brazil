@@ -63,98 +63,107 @@
 61,Nível 1 de Governança Corporativa,Consumo Cíclico,Fios e Tecidos,CEDO4
 62,Tradicional - BOVESPA,Utilidade Pública,Gás,CGAS3
 63,Tradicional - BOVESPA,Utilidade Pública,Gás,CGAS5
-64,Novo Mercado,Financeiro,Serviços Financeiros Diversos,CLSA3
-65,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CMIG3
-66,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CMIG4
-67,Novo Mercado,Consumo Cíclico,Serviços Educacionais,COGN3
-68,Novo Mercado,Consumo não Cíclico,Alimentos,CRFB3
-69,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,CSAN3
-70,Novo Mercado,Utilidade Pública,Água e Saneamento,CSMG3
-71,Tradicional - BOVESPA,Materiais Básicos,Siderurgia,CSNA3
-72,Novo Mercado,Financeiro,Serviços Financeiros Diversos,CSUD3
-73,Novo Mercado,Consumo Cíclico,Incorporações,CYRE3
-74,Novo Mercado,Consumo Cíclico,Incorporações,DIRR3
-75,Novo Mercado,Materiais Básicos,Madeira,DXCO3
-76,Tradicional - BOVESPA,Bens Industriais,Máq. e Equip. Industriais,EALT3
-77,Tradicional - BOVESPA,Bens Industriais,Máq. e Equip. Industriais,EALT4
-78,Novo Mercado,Bens Industriais,Exploração de Rodovias,ECOR3
-79,Novo Mercado,Utilidade Pública,Energia Elétrica,EGIE3
-80,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ELET3
-81,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ELET6
-82,Novo Mercado,Bens Industriais,Material Aeronáutico e de Defesa,EMBR3
-83,Novo Mercado,Utilidade Pública,Energia Elétrica,ENEV3
-84,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI11
-85,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI3
-86,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI4
-87,Novo Mercado,Utilidade Pública,Energia Elétrica,EQTL3
-88,Novo Mercado,Consumo Cíclico,Produtos Diversos,ESPA3
-89,Novo Mercado,Consumo Cíclico,Incorporações,EZTC3
-90,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,FESA3
-91,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,FESA4
-92,Novo Mercado,Comunicações,Telecomunicações,FIQE3
-93,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,FLRY3
-94,Nível 1 de Governança Corporativa,Bens Industriais,Material Rodoviário,FRAS3
-95,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GGBR3
-96,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GGBR4
-97,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GOAU3
-98,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GOAU4
-99,Nível 2 de Governança Corporativa,Bens Industriais,Transporte Aéreo,GOLL4
-100,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,HAPV3
-101,Novo Mercado,Saúde,Medicamentos e Outros Produtos,HYPE3
-102,Nível 1 de Governança Corporativa,Financeiro,Exploração de Imóveis,IGTI3
-103,Nível 1 de Governança Corporativa,Financeiro,Exploração de Imóveis,IGTI11
-104,Novo Mercado,Tecnologia da Informação,Computadores e Equipamentos,INTB3
-105,Novo Mercado,Financeiro,Resseguradoras,IRBR3
-106,Nível 1 de Governança Corporativa,Financeiro,Holdings Diversificadas,ITSA3
-107,Nível 1 de Governança Corporativa,Financeiro,Holdings Diversificadas,ITSA4
-108,Nível 1 de Governança Corporativa,Financeiro,Bancos,ITUB3
-109,Nível 1 de Governança Corporativa,Financeiro,Bancos,ITUB4
-110,Novo Mercado,Consumo não Cíclico,Carnes e Derivados,JBSS3
-111,Novo Mercado,Consumo Cíclico,Incorporações,JHSF3
-112,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN3
-113,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN4
-114,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN11
-115,Novo Mercado,Utilidade Pública,Energia Elétrica,LIGT3
-116,Novo Mercado,Financeiro,Exploração de Imóveis,LOGG3
-117,Novo Mercado,Consumo Cíclico,Tecidos. Vestuário e Calçados,LREN3
-118,Novo Mercado,Tecnologia da Informação,Programas e Serviços,LWSA3
-119,Novo Mercado,Consumo não Cíclico,Alimentos Diversos,MDIA3
-120,Novo Mercado,Consumo Cíclico,Eletrodomésticos,MGLU3
-121,Novo Mercado,Consumo não Cíclico,Carnes e Derivados,MRFG3
-122,Novo Mercado,Consumo Cíclico,Incorporações,MRVE3
-123,Nível 2 de Governança Corporativa,Financeiro,Exploração de Imóveis,MULT3
-124,Novo Mercado,Utilidade Pública,Energia Elétrica,NEOE3
-125,Novo Mercado,Consumo não Cíclico,Produtos de Uso Pessoal,NTCO3
-126,Nível 1 de Governança Corporativa,Comunicações,Telecomunicações,OIBR3
-127,Nível 1 de Governança Corporativa,Comunicações,Telecomunicações,OIBR4
-128,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,ONCO3
-129,Novo Mercado,Consumo não Cíclico,Alimentos,PCAR3
-130,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PETR3
-131,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PETR4
-132,Novo Mercado,Consumo Cíclico,Produtos Diversos,PETZ3
-133,Novo Mercado,Tecnologia da Informação,Computadores e Equipamentos,POSI3
-134,Novo Mercado,Financeiro,Seguradoras,PSSA3
-135,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PRIO3
-136,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,QUAL3
-137,Novo Mercado,Saúde,Medicamentos e Outros Produtos,RADL3
-138,Novo Mercado,Bens Industriais,Transporte Ferroviário,RAIL3
-139,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,RAIZ4
-140,Novo Mercado,Consumo Cíclico,Aluguel de carros,RENT3
-141,Novo Mercado,Utilidade Pública,Água e Saneamento,SBSP3
-142,Novo Mercado,Consumo não Cíclico,Agricultura,SLCE3
-143,Novo Mercado,Consumo Cíclico,Atividades Esportivas,SMFT3
-144,Novo Mercado,Consumo não Cíclico,Açucar e Alcool,SMTO3
-145,Novo Mercado,Materiais Básicos,Papel e Celulose,SUZB3
-146,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE11
-147,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE3
-148,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE4
-149,Novo Mercado,Comunicações,Telecomunicações,TIMS3
-150,Novo Mercado,Tecnologia da Informação,Programas e Serviços,TOTS3
-151,Novo Mercado,Consumo Cíclico,Incorporações,TRIS3
-152,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,UGPA3
-153,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,USIM3
-154,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,USIM5
-155,Novo Mercado,Materiais Básicos,Minerais Metálicos,VALE3
-156,Tradicional - BOVESPA,Comunicações,Telecomunicações,VIVT3
-157,Novo Mercado,Bens Industriais,Motores . Compressores e Outros,WEGE3
-158,Novo Mercado,Consumo Cíclico,Serviços Educacionais,YDUQ3
+64,Tradicional - BOVESPA,Consumo Cíclico,Tecidos. Vestuário e Calçados,CGRA4
+65,Novo Mercado,Financeiro,Serviços Financeiros Diversos,CLSA3
+66,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CLSC4
+67,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CMIG3
+68,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,CMIG4
+69,Novo Mercado,Consumo Cíclico,Serviços Educacionais,COGN3
+70,Novo Mercado,Consumo não Cíclico,Alimentos,CRFB3
+71,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,CSAN3
+72,Novo Mercado,Utilidade Pública,Água e Saneamento,CSMG3
+73,Tradicional - BOVESPA,Materiais Básicos,Siderurgia,CSNA3
+74,Novo Mercado,Financeiro,Serviços Financeiros Diversos,CSUD3
+75,Novo Mercado,Consumo Cíclico,Incorporações,CYRE3
+76,Novo Mercado,Consumo Cíclico,Incorporações,DIRR3
+77,Novo Mercado,Materiais Básicos,Madeira,DXCO3
+78,Tradicional - BOVESPA,Bens Industriais,Máq. e Equip. Industriais,EALT3
+79,Tradicional - BOVESPA,Bens Industriais,Máq. e Equip. Industriais,EALT4
+80,Novo Mercado,Bens Industriais,Exploração de Rodovias,ECOR3
+81,Novo Mercado,Utilidade Pública,Energia Elétrica,EGIE3
+82,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ELET3
+83,Nível 1 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ELET6
+84,Novo Mercado,Bens Industriais,Material Aeronáutico e de Defesa,EMBR3
+85,Novo Mercado,Utilidade Pública,Energia Elétrica,ENEV3
+86,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI11
+87,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI3
+88,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,ENGI4
+89,Novo Mercado,Utilidade Pública,Energia Elétrica,EQTL3
+90,Novo Mercado,Consumo Cíclico,Produtos Diversos,ESPA3
+91,Novo Mercado,Consumo Cíclico,Incorporações,EZTC3
+92,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,FESA3
+93,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,FESA4
+94,Novo Mercado,Comunicações,Telecomunicações,FIQE3
+95,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,FLRY3
+96,Nível 1 de Governança Corporativa,Bens Industriais,Material Rodoviário,FRAS3
+97,Novo Mercado,Bens Industriais,Máq. e Equip. Industriais,FRIO3
+98,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GGBR3
+99,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GGBR4
+100,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GOAU3
+101,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,GOAU4
+102,Nível 2 de Governança Corporativa,Bens Industriais,Transporte Aéreo,GOLL4
+103,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,HAPV3
+104,Novo Mercado,Saúde,Medicamentos e Outros Produtos,HYPE3
+105,Nível 1 de Governança Corporativa,Financeiro,Exploração de Imóveis,IGTI3
+106,Nível 1 de Governança Corporativa,Financeiro,Exploração de Imóveis,IGTI11
+107,Novo Mercado,Tecnologia da Informação,Computadores e Equipamentos,INTB3
+108,Novo Mercado,Financeiro,Resseguradoras,IRBR3
+109,Nível 1 de Governança Corporativa,Financeiro,Holdings Diversificadas,ITSA3
+110,Nível 1 de Governança Corporativa,Financeiro,Holdings Diversificadas,ITSA4
+111,Nível 1 de Governança Corporativa,Financeiro,Bancos,ITUB3
+112,Nível 1 de Governança Corporativa,Financeiro,Bancos,ITUB4
+113,Novo Mercado,Consumo não Cíclico,Carnes e Derivados,JBSS3
+114,Novo Mercado,Consumo Cíclico,Incorporações,JHSF3
+115,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN3
+116,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN4
+117,Nível 2 de Governança Corporativa,Materiais Básicos,Papel e Celulose,KLBN11
+118,Novo Mercado,Utilidade Pública,Energia Elétrica,LIGT3
+119,Novo Mercado,Financeiro,Exploração de Imóveis,LOGG3
+120,Novo Mercado,Consumo Cíclico,Tecidos. Vestuário e Calçados,LREN3
+121,Novo Mercado,Tecnologia da Informação,Programas e Serviços,LWSA3
+122,Novo Mercado,Consumo não Cíclico,Alimentos Diversos,MDIA3
+123,Novo Mercado,Consumo Cíclico,Eletrodomésticos,MGLU3
+124,Novo Mercado,Consumo não Cíclico,Carnes e Derivados,MRFG3
+125,Novo Mercado,Consumo Cíclico,Incorporações,MRVE3
+126,Nível 2 de Governança Corporativa,Financeiro,Exploração de Imóveis,MULT3
+127,Novo Mercado,Utilidade Pública,Energia Elétrica,NEOE3
+128,Novo Mercado,Consumo não Cíclico,Produtos de Uso Pessoal,NTCO3
+129,Bovespa Mais,Materiais Básicos,Fertilizantes e Defensivos,NUTR3
+130,Nível 1 de Governança Corporativa,Comunicações,Telecomunicações,OIBR3
+131,Nível 1 de Governança Corporativa,Comunicações,Telecomunicações,OIBR4
+132,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,ONCO3
+133,Novo Mercado,Consumo não Cíclico,Alimentos,PCAR3
+134,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PETR3
+135,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PETR4
+136,Novo Mercado,Consumo Cíclico,Produtos Diversos,PETZ3
+137,Novo Mercado,Tecnologia da Informação,Computadores e Equipamentos,POSI3
+138,Novo Mercado,Financeiro,Seguradoras,PSSA3
+139,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,PRIO3
+140,Novo Mercado,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,QUAL3
+141,Novo Mercado,Saúde,Medicamentos e Outros Produtos,RADL3
+142,Novo Mercado,Bens Industriais,Transporte Ferroviário,RAIL3
+143,Nível 2 de Governança Corporativa,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,RAIZ4
+144,Novo Mercado,Consumo Cíclico,Aluguel de carros,RENT3
+145,Novo Mercado,Utilidade Pública,Água e Saneamento,SBSP3
+146,Novo Mercado,Consumo não Cíclico,Agricultura,SLCE3
+147,Novo Mercado,Consumo Cíclico,Atividades Esportivas,SMFT3
+148,Novo Mercado,Consumo não Cíclico,Açucar e Alcool,SMTO3
+149,Novo Mercado,Materiais Básicos,Papel e Celulose,SUZB3
+150,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE11
+151,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE3
+152,Nível 2 de Governança Corporativa,Utilidade Pública,Energia Elétrica,TAEE4
+153,Nível 2 de Governança Corporativa,Bens Industriais,Armas e Munições,TASA3
+154,Nível 2 de Governança Corporativa,Bens Industriais,Armas e Munições,TASA4
+155,Novo Mercado,Comunicações,Telecomunicações,TIMS3
+156,Novo Mercado,Tecnologia da Informação,Programas e Serviços,TOTS3
+157,Novo Mercado,Consumo Cíclico,Incorporações,TRIS3
+158,Novo Mercado,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,UGPA3
+159,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,USIM3
+160,Nível 1 de Governança Corporativa,Materiais Básicos,Siderurgia,USIM5
+161,Novo Mercado,Materiais Básicos,Minerais Metálicos,VALE3
+162,Tradicional - BOVESPA,Comunicações,Telecomunicações,VIVT3
+163,Novo Mercado,Bens Industriais,Motores . Compressores e Outros,WEGE3
+164,Novo Mercado,Financeiro,Corretoras de Seguros e Resseguros,WIZC3
+165,Tradicional - BOVESPA,Consumo Cíclico,Eletrodomésticos,WHRL3
+166,Nível 2 de Governança Corporativa,Financeiro,Bancos,ABCB4
+167,Novo Mercado,Consumo Cíclico,Serviços Educacionais,YDUQ3
