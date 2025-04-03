@@ -47,7 +47,8 @@ class SetorDataScraper:
 
     def rodar_acoes(self):
         acoes_processadas = set()
-        dados = {"Segmento de Listagem": [], 
+        dados = {"Empresa": [],
+                "Segmento de Listagem": [], 
                  "Setor": [], 
                  "Segmento": [], 
                  "tic": []}
@@ -77,6 +78,7 @@ class SetorDataScraper:
                     df_dic = self.obter_dados_tabela(navegador=navegador)
                 
                 metrics = [
+                    "Empresa",
                     "Segmento de Listagem",
                     "Setor",
                     "Segmento",
