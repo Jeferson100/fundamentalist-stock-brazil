@@ -1,7 +1,9 @@
 name: Scraping Setor
 on: 
-  schedule:
-    - cron: "0 6 1 * *"
+  workflow_run:
+    workflows: ["Scraping Precos Relativos"]
+    types:
+      - completed
   workflow_dispatch:
 jobs:
     build:
