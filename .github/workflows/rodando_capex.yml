@@ -1,7 +1,9 @@
 name: Scraping Capex
 on: 
-  schedule:
-    - cron: "0 8 15 1,4,7,9 *"
+  workflow_run:
+    workflows: ["Balanço patrimonial"]
+    types:
+      - completed
   workflow_dispatch:
 jobs:
     build:
