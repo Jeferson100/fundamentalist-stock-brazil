@@ -1,7 +1,9 @@
 name: Scraping Precos Relativos
 on: 
-  schedule:
-    - cron: "0 6 1 * *"
+  workflow_run:
+    workflows: ["Scraping Retornos e Margens"]
+    types:
+      - completed
   workflow_dispatch:
 jobs:
     build:
