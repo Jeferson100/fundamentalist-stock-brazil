@@ -1,7 +1,9 @@
 name: Scraping DRE
 on:
-  schedule:
-    - cron: "0 7 15 1,4,7,9 *"
+  workflow_run:
+    workflows: ["Scraping Capex"]
+    types:
+      - completed
   workflow_dispatch:
 jobs:
     build:
