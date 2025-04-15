@@ -1,7 +1,9 @@
 name: Scraping Fluxo de caixa
 on:
-  schedule:
-    - cron: "0 10 15 1,4,7,9 *"
+  workflow_run:
+    workflows: ["Scraping DRE"]
+    types:
+      - completed
   workflow_dispatch:
 jobs:
     build:
